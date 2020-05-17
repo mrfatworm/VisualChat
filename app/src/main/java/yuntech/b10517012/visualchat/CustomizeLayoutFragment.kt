@@ -8,16 +8,15 @@ import androidx.fragment.app.Fragment
 
 class CustomizeLayoutFragment : Fragment() {
 
-//    private lateinit var dashboardViewModel: DashboardViewModel
+    private lateinit var customizeViewModel: CustomizeViewModel;
 
+    fun setViewModel(customizeViewModel: CustomizeViewModel){
+        this.customizeViewModel = customizeViewModel
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-//        dashboardViewModel = ViewModelProviders.of(this).get(DashboardViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_customize_layout, container, false)
-//        val textView: TextView = root.findViewById(R.id.text_dashboard)
-//        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
-//            textView.text = it
-//        })
+
         return root
     }
 }

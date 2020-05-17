@@ -5,11 +5,18 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 
 class CustomizeAdapter(fragmentManager: FragmentManager): FragmentPagerAdapter(fragmentManager){
+
+    private lateinit var customizeViewModel: CustomizeViewModel;
+
+    fun setViewModel(customizeViewModel: CustomizeViewModel){
+        this.customizeViewModel = customizeViewModel
+    }
+
     override fun getItem(position: Int): Fragment {
         return when(position){
-            0 -> CustomizeColorFragment()
-            1 -> CustomizeFontFragment()
-            else -> CustomizeLayoutFragment()
+            0 -> CustomizeColorFragment().apply { setViewModel(customizeViewModel) }
+            1 -> CustomizeFontFragment().apply { setViewModel(customizeViewModel) }
+            else -> CustomizeLayoutFragment().apply { setViewModel(customizeViewModel) }
         }
     }
 
