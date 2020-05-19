@@ -51,12 +51,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/img_main_preview_bg" />
 
-    <yuntech.b10517012.visualchat.WrapContentHeightViewPager
+    <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vp_main_setting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:background="@color/white"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
