@@ -1,11 +1,16 @@
 package yuntech.b10517012.visualchat
 
+import android.graphics.Typeface
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
+import androidx.core.widget.TextViewCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager2.widget.ViewPager2
@@ -20,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var adapter: ViewPager2Adapter
     private lateinit var customizeViewModel: CustomizeViewModel;
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -28,6 +34,26 @@ class MainActivity : AppCompatActivity() {
         setupView()
         customizeViewModel.currentColor.observe(this, Observer {
             tvPreview.setTextColor(it)
+        })
+        customizeViewModel.currentFont.observe(this, Observer {
+            tvPreview.setTextSize(TypedValue.COMPLEX_UNIT_SP, it)
+        })
+        customizeViewModel.currentAutoFont.observe(this, Observer {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                if(it){
+                    tvPreview.setAutoSizeTextTypeWithDefaults(TextView.AUTO_SIZE_TEXT_TYPE_UNIFORM)
+                }else{
+                    tvPreview.setAutoSizeTextTypeWithDefaults(TextView.AUTO_SIZE_TEXT_TYPE_NONE)
+                }
+            }
+        })
+        customizeViewModel.currentBold.observe(this, Observer {
+            if (it){
+                tvPreview.setTypeface(null, Typeface.BOLD)
+            }else{
+                tvPreview.setTypeface(null, Typeface.NORMAL)
+            }
+
         })
     }
 

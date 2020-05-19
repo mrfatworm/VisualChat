@@ -20,6 +20,8 @@
             android:layout_height="0dp"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
+            android:max="15"
+            android:min="2"
             app:layout_constraintBottom_toBottomOf="@+id/sw_font_auto"
             app:layout_constraintEnd_toStartOf="@+id/cb_font_bold"
             app:layout_constraintStart_toEndOf="@+id/sw_font_auto"

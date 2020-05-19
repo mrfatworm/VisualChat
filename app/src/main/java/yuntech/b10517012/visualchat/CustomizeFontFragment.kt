@@ -1,5 +1,6 @@
 package yuntech.b10517012.visualchat
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -24,6 +25,28 @@ class CustomizeFontFragment : Fragment() {
         swAuto = root.findViewById(R.id.sw_font_auto)
         seekBar = root.findViewById(R.id.seekBar_font)
         cbBold = root.findViewById(R.id.cb_font_bold)
+
+        swAuto.setOnCheckedChangeListener { compoundButton, b ->
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                seekBar.isEnabled = !b
+                customizeViewModel.setAutoFont(b)
+            }else if(b){
+                Toast.makeText(context, getString(R.string.auto_font_warning), Toast.LENGTH_SHORT).show()
+            }
+
+        }
+
+        cbBold.setOnCheckedChangeListener { compoundButton, b ->
+            customizeViewModel.setBold(b)
+        }
+
+        seekBar.setOnSeekBarChangeListener(object :SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
+                customizeViewModel.setFont((p1*10).toFloat())
+            }
+            override fun onStartTrackingTouch(p0: SeekBar?) { }
+            override fun onStopTrackingTouch(p0: SeekBar?) { }
+        })
 
         return root
     }
