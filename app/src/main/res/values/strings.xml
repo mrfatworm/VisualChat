@@ -4,4 +4,5 @@
     <string name="tab_customize_font">字型大小</string>
     <string name="tab_customize_layout">方向設置</string>
     <string name="auto_font_warning">此功能僅支援 Android 8.0 或更新版本系統</string>
+    <string name="text_preview">文字預覽</string>
 </resources>
