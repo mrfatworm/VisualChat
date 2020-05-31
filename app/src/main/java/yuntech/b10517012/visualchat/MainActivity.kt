@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
@@ -115,9 +116,13 @@ class MainActivity : AppCompatActivity() {
         viewPager = findViewById(R.id.vp_main_setting)
         edtInput = findViewById(R.id.edt_main_input)
         btnShow = findViewById(R.id.btn_main_show)
+
+        val height = resources.displayMetrics.heightPixels
+        val width = resources.displayMetrics.widthPixels
+        imgBG.layoutParams.height = width* width/height
+
         adapter = ViewPager2Adapter(this)
         adapter.setViewModel(customizeViewModel)
-
         //val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         viewPager.adapter = adapter
         TabLayoutMediator(tabLayout, viewPager){tab, position ->
@@ -127,8 +132,5 @@ class MainActivity : AppCompatActivity() {
                 else -> "方向設置"
             })
         }.attach()
-
-
-
     }
 }
