@@ -7,19 +7,23 @@ import androidx.lifecycle.ViewModel
 class CustomizeViewModel : ViewModel() {
 
     private val _color = MutableLiveData<Int>()
+    private val _bgColor = MutableLiveData<Int>()
     private val _font = MutableLiveData<Float>()
     private val _autoFont = MutableLiveData<Boolean>()
     private val _bold = MutableLiveData<Boolean>()
-    private val _layout = MutableLiveData<Int>()
 
     val currentColor: LiveData<Int> = _color
+    val currentBGColor: LiveData<Int> = _bgColor
     val currentFont: LiveData<Float> = _font
     val currentAutoFont: LiveData<Boolean> = _autoFont
     val currentBold: LiveData<Boolean> = _bold
-    val currentLayout: LiveData<Int> = _layout
 
     fun setColor(value: Int) {
         _color.value = value
+    }
+
+    fun setBGColor(value: Int) {
+        _bgColor.value = value
     }
 
     fun setFont(value: Float){
@@ -32,10 +36,6 @@ class CustomizeViewModel : ViewModel() {
 
     fun setBold(value: Boolean){
         _bold.value = value
-    }
-
-    fun setLayout(value: Int){
-        _layout.value = value
     }
 
     //    val color: LiveData<String> = Transformations.map(_color) {

@@ -1,25 +1,25 @@
 package yuntech.b10517012.visualchat
 
+import android.R.attr.button
 import android.content.Intent
 import android.graphics.Typeface
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.DisplayMetrics
 import android.util.TypedValue
-import android.view.View
-import android.view.ViewGroup
-import android.widget.*
-import androidx.annotation.RequiresApi
-import androidx.core.widget.TextViewCompat
+import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var tabLayout:TabLayout
     private lateinit var viewPager: ViewPager2
     private lateinit var adapter: ViewPager2Adapter
-    private lateinit var customizeViewModel: CustomizeViewModel;
+    private lateinit var customizeViewModel: CustomizeViewModel
     private lateinit var edtInput: EditText
     private lateinit var btnShow: ImageButton
     private var tvSize: Float = 48F
@@ -45,6 +45,11 @@ class MainActivity : AppCompatActivity() {
         /** Text color listener */
         customizeViewModel.currentColor.observe(this, Observer {
             tvPreview.setTextColor(it)
+        })
+
+        /** Text color listener */
+        customizeViewModel.currentBGColor.observe(this, Observer {
+            imgBG.setBackgroundColor(it)
         })
 
         /** Text size listener */
@@ -94,12 +99,13 @@ class MainActivity : AppCompatActivity() {
         btnShow.setOnClickListener {
             var intent = Intent(this, TextShowActivity::class.java)
             var bundle = Bundle()
+            val bgColor = imgBG.background as ColorDrawable
 
             bundle.apply {
                 putString("text", tvPreview.text.toString())
                 putFloat("size", tvSize)
                 putInt("color", tvPreview.currentTextColor)
-                putInt("bg", imgBG.solidColor)
+                putInt("bg", bgColor.color)
                 putBoolean("auto", isAuto)
                 putBoolean("bold", isBold )
             }

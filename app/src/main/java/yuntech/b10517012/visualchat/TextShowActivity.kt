@@ -10,6 +10,7 @@ import android.view.WindowManager
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.setPadding
 
 class TextShowActivity : AppCompatActivity() {
 

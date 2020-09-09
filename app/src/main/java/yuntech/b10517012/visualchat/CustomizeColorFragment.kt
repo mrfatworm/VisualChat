@@ -1,5 +1,6 @@
 package yuntech.b10517012.visualchat
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,12 +9,15 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class CustomizeColorFragment : Fragment() {
 
     private lateinit var tvColor:TextView
     private lateinit var btnColor1:Button
     private lateinit var btnColor2:Button
+    private lateinit var recyclerView: RecyclerView
     private lateinit var customizeViewModel: CustomizeViewModel;
 
     fun setViewModel(customizeViewModel: CustomizeViewModel){
@@ -28,15 +32,15 @@ class CustomizeColorFragment : Fragment() {
         tvColor = root.findViewById(R.id.tv_color)
         btnColor1 = root.findViewById(R.id.btn_color1)
         btnColor2 = root.findViewById(R.id.btn_color2)
+        recyclerView = root.findViewById(R.id.recyclerview)
 
         btnColor1.setOnClickListener(btnClick())
         btnColor2.setOnClickListener(btnClick())
-
-        customizeViewModel.currentColor.observe(this, Observer {
-            tvColor.setTextColor(it)
-        })
-
-
+        val linearLayoutManager = LinearLayoutManager(context)
+        linearLayoutManager.orientation = RecyclerView.HORIZONTAL
+        val adapter = ColorAdapter(sampleColorData(), customizeViewModel)
+        recyclerView.layoutManager = linearLayoutManager
+        recyclerView.adapter = adapter
         return root
     }
 
@@ -50,6 +54,18 @@ class CustomizeColorFragment : Fragment() {
             customizeViewModel.setColor(resources.getColor(R.color.gray))
         }
 
+    }
+
+    private fun sampleColorData():Array<ColorModel>{
+        var data = ColorModel("",0,0)
+        data.apply {
+            name= ""
+            textColor = Color.GREEN
+            bgColor = Color.BLACK
+        }
+        var dataArray = Array<ColorModel>(10){data}
+
+        return dataArray
     }
 
 }
