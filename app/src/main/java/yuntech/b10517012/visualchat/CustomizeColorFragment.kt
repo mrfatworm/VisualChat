@@ -2,21 +2,16 @@ package yuntech.b10517012.visualchat
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class CustomizeColorFragment : Fragment() {
 
-    private lateinit var tvColor:TextView
-    private lateinit var btnColor1:Button
-    private lateinit var btnColor2:Button
     private lateinit var recyclerView: RecyclerView
     private lateinit var customizeViewModel: CustomizeViewModel;
 
@@ -25,17 +20,11 @@ class CustomizeColorFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View? {
         val root = inflater.inflate(R.layout.fragment_customize_color, container, false)
-
-        //colorViewModel = ViewModelProviders.of(this).get(ColorViewModel::class.java)
-        tvColor = root.findViewById(R.id.tv_color)
-        btnColor1 = root.findViewById(R.id.btn_color1)
-        btnColor2 = root.findViewById(R.id.btn_color2)
         recyclerView = root.findViewById(R.id.recyclerview)
 
-        btnColor1.setOnClickListener(btnClick())
-        btnColor2.setOnClickListener(btnClick())
         val linearLayoutManager = LinearLayoutManager(context)
         linearLayoutManager.orientation = RecyclerView.HORIZONTAL
         val adapter = ColorAdapter(sampleColorData(), customizeViewModel)
@@ -44,26 +33,46 @@ class CustomizeColorFragment : Fragment() {
         return root
     }
 
-    private fun btnClick() =View.OnClickListener { view ->
-        if(view.id == R.id.btn_color1){
-            tvColor.setTextColor(resources.getColor(R.color.black))
-            customizeViewModel.setColor(resources.getColor(R.color.black))
-        }else{
-            tvColor.setTextColor(resources.getColor(R.color.gray))
-
-            customizeViewModel.setColor(resources.getColor(R.color.gray))
-        }
-
-    }
-
-    private fun sampleColorData():Array<ColorModel>{
-        var data = ColorModel("",0,0)
-        data.apply {
-            name= ""
+    private fun sampleColorData(): Array<ColorModel> {
+        val dataArray = Array(12){ColorModel(0,0)}
+        dataArray[0].apply {
+            textColor = Color.WHITE
+            bgColor = resources.getColor(R.color.blackboard) }
+        dataArray[1].apply {
+            textColor = Color.WHITE
+            bgColor = resources.getColor(R.color.darkYellow) }
+        dataArray[2].apply {
+            textColor = Color.WHITE
+            bgColor = resources.getColor(R.color.darkRed) }
+        dataArray[3].apply {
+            textColor = Color.WHITE
+            bgColor = resources.getColor(R.color.navy) }
+        dataArray[4].apply {
+            textColor = Color.WHITE
+            bgColor = Color.BLACK }
+        dataArray[5].apply {
+            textColor = resources.getColor(R.color.pttYellow)
+            bgColor = Color.BLACK }
+        dataArray[6].apply {
             textColor = Color.GREEN
-            bgColor = Color.BLACK
-        }
-        var dataArray = Array<ColorModel>(10){data}
+            bgColor = Color.BLACK }
+        dataArray[7].apply {
+            textColor = resources.getColor(R.color.skin)
+            bgColor = resources.getColor(R.color.navy) }
+        dataArray[8].apply {
+            textColor = resources.getColor(R.color.navy)
+            bgColor = resources.getColor(R.color.lightYellow) }
+        dataArray[9].apply {
+            textColor = resources.getColor(R.color.pink)
+            bgColor = resources.getColor(R.color.lightYellow) }
+        dataArray[10].apply {
+            textColor = Color.WHITE
+            bgColor = resources.getColor(R.color.pink) }
+        dataArray[11].apply {
+            textColor = Color.BLACK
+            bgColor = resources.getColor(R.color.pttYellow) }
+
+
 
         return dataArray
     }

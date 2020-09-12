@@ -14,6 +14,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager2.widget.ViewPager2
@@ -50,6 +51,7 @@ class MainActivity : AppCompatActivity() {
         /** Text color listener */
         customizeViewModel.currentBGColor.observe(this, Observer {
             imgBG.setBackgroundColor(it)
+            this.window.statusBarColor = it
         })
 
         /** Text size listener */
