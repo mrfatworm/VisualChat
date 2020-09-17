@@ -5,51 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:text="施工中"
+        android:textSize="36sp"
+        android:layout_margin="36dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <SeekBar
-            android:id="@+id/seekBar_font"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:max="15"
-            android:min="2"
-            app:layout_constraintBottom_toBottomOf="@+id/sw_font_auto"
-            app:layout_constraintEnd_toStartOf="@+id/cb_font_bold"
-            app:layout_constraintStart_toEndOf="@+id/sw_font_auto"
-            app:layout_constraintTop_toTopOf="@+id/sw_font_auto" />
-
-        <com.google.android.material.checkbox.MaterialCheckBox
-            android:id="@+id/cb_font_bold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:button="@drawable/selector_bold"
-            android:scaleX="1.5"
-            android:scaleY="1.5"
-            app:layout_constraintBottom_toBottomOf="@+id/seekBar_font"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/seekBar_font" />
-
-        <Switch
-            android:id="@+id/sw_font_auto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:switchPadding="8dp"
-            android:layout_margin="24dp"
-            android:text="自動"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

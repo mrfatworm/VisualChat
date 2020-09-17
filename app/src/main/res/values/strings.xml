@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">VisualChat</string>
-    <string name="tab_customize_color">色彩配置</string>
-    <string name="tab_customize_font">字型大小</string>
-    <string name="tab_customize_layout">方向設置</string>
+    <string name="tab_customize_style">字型色彩</string>
+    <string name="tab_my_word">常用詞庫</string>
+    <string name="tab_advance_function">進階功能</string>
     <string name="auto_font_warning">此功能僅支援 Android 8.0 或更新版本系統</string>
     <string name="text_preview">文字預覽</string>
 </resources>

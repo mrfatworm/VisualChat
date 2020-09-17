@@ -1,6 +1,9 @@
 package yuntech.b10517012.visualchat
 
 import android.R.attr.button
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.content.Intent
 import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
@@ -9,10 +12,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.TypedValue
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
@@ -32,9 +32,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var customizeViewModel: CustomizeViewModel
     private lateinit var edtInput: EditText
     private lateinit var btnShow: ImageButton
+    private lateinit var btnClear: ImageButton
+    private lateinit var btnPaste: ImageButton
     private var tvSize: Float = 48F
     private var isAuto: Boolean = false
     private var isBold: Boolean = false
+    lateinit var clipboard: ClipboardManager
+    lateinit var clipData: ClipData
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -97,6 +101,18 @@ class MainActivity : AppCompatActivity() {
 
         })
 
+        btnClear.setOnClickListener {
+            edtInput.text.clear()
+            Toast.makeText(this, "清除", Toast.LENGTH_SHORT).show()
+        }
+
+        btnPaste.setOnClickListener {
+            clipData = clipboard.primaryClip as ClipData
+            edtInput.setText(edtInput.text.toString() + clipData.getItemAt(0).text)
+            edtInput.setSelection(edtInput.text.length)
+            Toast.makeText(this, "貼上", Toast.LENGTH_SHORT).show()
+        }
+
         /** GO to fullscreen listener */
         btnShow.setOnClickListener {
             var intent = Intent(this, TextShowActivity::class.java)
@@ -124,7 +140,10 @@ class MainActivity : AppCompatActivity() {
         viewPager = findViewById(R.id.vp_main_setting)
         edtInput = findViewById(R.id.edt_main_input)
         btnShow = findViewById(R.id.btn_main_show)
+        btnClear = findViewById(R.id.btn_clear)
+        btnPaste = findViewById(R.id.btn_paste)
 
+        clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val height = resources.displayMetrics.heightPixels
         val width = resources.displayMetrics.widthPixels
         imgBG.layoutParams.height = width* width/height
@@ -135,9 +154,9 @@ class MainActivity : AppCompatActivity() {
         viewPager.adapter = adapter
         TabLayoutMediator(tabLayout, viewPager){tab, position ->
             tab.text = (when(position){
-                0 -> "色彩配置"
-                1 -> "字型大小"
-                else -> "方向設置"
+                0 -> getString(R.string.tab_customize_style)
+                1 -> getString(R.string.tab_my_word)
+                else -> getString(R.string.tab_advance_function)
             })
         }.attach()
     }

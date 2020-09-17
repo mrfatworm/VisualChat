@@ -11,9 +11,9 @@ class ViewPager2Adapter(fragmentActivity: FragmentActivity) :
 
     override fun createFragment(position: Int): Fragment {
         return when(position){
-            0 -> CustomizeColorFragment().apply { setViewModel(customizeViewModel) }
-            1 -> CustomizeFontFragment().apply { setViewModel(customizeViewModel) }
-            else -> CustomizeLayoutFragment().apply { setViewModel(customizeViewModel) }
+            0 -> CustomizeStyleFragment().apply { setViewModel(customizeViewModel) }
+            1 -> MyWordFragment().apply { setViewModel(customizeViewModel) }
+            else -> AdvanceFunctionFragment().apply { setViewModel(customizeViewModel) }
         }
     }
 

@@ -1,19 +1,27 @@
 package yuntech.b10517012.visualchat
 
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
+import android.widget.SeekBar
+import android.widget.Switch
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-class CustomizeColorFragment : Fragment() {
+class CustomizeStyleFragment : Fragment() {
 
-    private lateinit var recyclerView: RecyclerView
     private lateinit var customizeViewModel: CustomizeViewModel;
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var swAuto: Switch
+    private lateinit var seekBar: SeekBar
+    private lateinit var cbBold: CheckBox
 
     fun setViewModel(customizeViewModel: CustomizeViewModel){
         this.customizeViewModel = customizeViewModel
@@ -24,12 +32,37 @@ class CustomizeColorFragment : Fragment() {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_customize_color, container, false)
         recyclerView = root.findViewById(R.id.recyclerview)
+        swAuto = root.findViewById(R.id.sw_font_auto)
+        seekBar = root.findViewById(R.id.seekBar_font)
+        cbBold = root.findViewById(R.id.cb_font_bold)
 
         val linearLayoutManager = LinearLayoutManager(context)
         linearLayoutManager.orientation = RecyclerView.HORIZONTAL
         val adapter = ColorAdapter(sampleColorData(), customizeViewModel)
         recyclerView.layoutManager = linearLayoutManager
         recyclerView.adapter = adapter
+
+        swAuto.setOnCheckedChangeListener { compoundButton, b ->
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                seekBar.isEnabled = !b
+                customizeViewModel.setAutoFont(b)
+            }else if(b){
+                Toast.makeText(context, getString(R.string.auto_font_warning), Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        cbBold.setOnCheckedChangeListener { compoundButton, b ->
+            customizeViewModel.setBold(b)
+        }
+
+        seekBar.setOnSeekBarChangeListener(object :SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
+                customizeViewModel.setFont((p1*10).toFloat())
+            }
+            override fun onStartTrackingTouch(p0: SeekBar?) { }
+            override fun onStopTrackingTouch(p0: SeekBar?) { }
+        })
+
         return root
     }
 

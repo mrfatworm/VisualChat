@@ -90,7 +90,7 @@
             android:inputType="textMultiLine"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_main_show"
-            app:layout_constraintStart_toEndOf="@+id/btn_dictionary"
+            app:layout_constraintStart_toEndOf="@+id/btn_paste"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
@@ -103,15 +103,25 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_send"/>
-
         <ImageButton
-            android:id="@+id/btn_dictionary"
+            android:id="@+id/btn_clear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
             android:background="@null"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_delete" />
+
+        <ImageButton
+            android:id="@+id/btn_paste"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
+            android:background="@null"
+            app:layout_constraintStart_toEndOf="@+id/btn_clear"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_library_books" />
 

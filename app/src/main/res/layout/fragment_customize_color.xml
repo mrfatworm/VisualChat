@@ -10,11 +10,47 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
     </androidx.recyclerview.widget.RecyclerView>
 
+    <Switch
+        android:id="@+id/sw_font_auto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+        android:layout_marginStart="12dp"
+        android:switchPadding="8dp"
+        android:text="自動"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerview" />
+
+    <SeekBar
+        android:id="@+id/seekBar_font"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:max="15"
+        android:min="2"
+        app:layout_constraintBottom_toBottomOf="@+id/sw_font_auto"
+        app:layout_constraintEnd_toStartOf="@+id/cb_font_bold"
+        app:layout_constraintStart_toEndOf="@+id/sw_font_auto"
+        app:layout_constraintTop_toTopOf="@+id/sw_font_auto" />
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/cb_font_bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:button="@drawable/selector_bold"
+        android:scaleX="1.5"
+        android:scaleY="1.5"
+        app:layout_constraintBottom_toBottomOf="@+id/seekBar_font"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/seekBar_font" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
