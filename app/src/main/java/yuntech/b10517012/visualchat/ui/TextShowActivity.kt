@@ -1,4 +1,4 @@
-package yuntech.b10517012.visualchat
+package yuntech.b10517012.visualchat.ui
 
 import android.graphics.Typeface
 import android.os.Build
@@ -10,7 +10,7 @@ import android.view.WindowManager
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.setPadding
+import yuntech.b10517012.visualchat.R
 
 class TextShowActivity : AppCompatActivity() {
 

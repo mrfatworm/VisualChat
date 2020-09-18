@@ -1,6 +1,5 @@
-package yuntech.b10517012.visualchat
+package yuntech.b10517012.visualchat.ui
 
-import android.R.attr.button
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
@@ -14,12 +13,14 @@ import android.text.TextWatcher
 import android.util.TypedValue
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import yuntech.b10517012.visualchat.model.CustomizeViewModel
+import yuntech.b10517012.visualchat.R
+import yuntech.b10517012.visualchat.adapter.ViewPager2Adapter
 
 
 class MainActivity : AppCompatActivity() {
@@ -84,6 +85,11 @@ class MainActivity : AppCompatActivity() {
                 tvPreview.setTypeface(null, Typeface.NORMAL)
             }
             isBold = it
+        })
+
+        /** My word listener */
+        customizeViewModel.currentWord.observe(this, Observer {
+            edtInput.setText(it)
         })
 
         /** Text input listener */

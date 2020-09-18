@@ -1,8 +1,12 @@
-package yuntech.b10517012.visualchat
+package yuntech.b10517012.visualchat.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import yuntech.b10517012.visualchat.model.CustomizeViewModel
+import yuntech.b10517012.visualchat.ui.AdvanceFunctionFragment
+import yuntech.b10517012.visualchat.ui.CustomizeStyleFragment
+import yuntech.b10517012.visualchat.ui.MyWordFragment
 
 class ViewPager2Adapter(fragmentActivity: FragmentActivity) :
     FragmentStateAdapter(fragmentActivity) {
