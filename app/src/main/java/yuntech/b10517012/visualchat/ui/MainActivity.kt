@@ -1,9 +1,6 @@
 package yuntech.b10517012.visualchat.ui
 
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
-import android.content.Intent
+import android.content.*
 import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
@@ -38,6 +35,7 @@ class MainActivity : AppCompatActivity() {
     private var tvSize: Float = 48F
     private var isAuto: Boolean = false
     private var isBold: Boolean = false
+    lateinit var pref: SharedPreferences
     lateinit var clipboard: ClipboardManager
     lateinit var clipData: ClipData
 
@@ -46,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         customizeViewModel = ViewModelProviders.of(this).get(CustomizeViewModel::class.java)
-        setupView()
+        initView()
 
         /** Text color listener */
         customizeViewModel.currentColor.observe(this, Observer {
@@ -103,6 +101,7 @@ class MainActivity : AppCompatActivity() {
                 if(p0?.length == 0){
                     tvPreview.text = getString(R.string.text_preview)
                 }
+                pref.edit().putString("Text", p0.toString()).apply()
             }
 
         })
@@ -137,9 +136,13 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        if (pref.getString("Text", "")!= ""){
+            edtInput.setText(pref.getString("Text",""))
+        }
+
     }
 
-    private fun setupView(){
+    private fun initView(){
         tvPreview = findViewById(R.id.tv_main_preview)
         imgBG = findViewById(R.id.img_main_preview_bg)
         tabLayout = findViewById(R.id.tab_main_setting)
@@ -148,6 +151,8 @@ class MainActivity : AppCompatActivity() {
         btnShow = findViewById(R.id.btn_main_show)
         btnClear = findViewById(R.id.btn_clear)
         btnPaste = findViewById(R.id.btn_paste)
+
+        pref = getSharedPreferences("favor", Context.MODE_PRIVATE)
 
         clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val height = resources.displayMetrics.heightPixels

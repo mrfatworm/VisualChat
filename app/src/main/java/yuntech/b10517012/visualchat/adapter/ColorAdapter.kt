@@ -1,5 +1,6 @@
 package yuntech.b10517012.visualchat.adapter
 
+import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,10 +14,13 @@ import yuntech.b10517012.visualchat.R
 class ColorAdapter : RecyclerView.Adapter<ColorAdapter.ViewHolder>{
     private var data: Array<ColorModel>
     private var customizeViewModel: CustomizeViewModel
+    private var pref: SharedPreferences
 
-    constructor(data: Array<ColorModel>, customizeViewModel: CustomizeViewModel): super(){
+    constructor(data: Array<ColorModel>, customizeViewModel: CustomizeViewModel
+                , pref: SharedPreferences): super(){
         this.data = data
         this.customizeViewModel = customizeViewModel
+        this.pref = pref
     }
 
     class ViewHolder:RecyclerView.ViewHolder{
@@ -46,6 +50,10 @@ class ColorAdapter : RecyclerView.Adapter<ColorAdapter.ViewHolder>{
         holder.cardView.setOnClickListener{
             customizeViewModel.setColor(model.textColor)
             customizeViewModel.setBGColor(model.bgColor)
+            pref.edit()
+                .putInt("TextColor", model.textColor)
+                .putInt("BgColor", model.bgColor)
+                .apply()
         }
     }
 }
