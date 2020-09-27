@@ -7,6 +7,7 @@ import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.util.TypedValue
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -30,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var customizeViewModel: CustomizeViewModel
     private lateinit var edtInput: EditText
     private lateinit var btnShow: ImageButton
+    private lateinit var btnSetting: ImageButton
     private lateinit var btnClear: ImageButton
     private lateinit var btnPaste: ImageButton
     private var tvSize: Float = 48F
@@ -39,10 +41,10 @@ class MainActivity : AppCompatActivity() {
     lateinit var clipboard: ClipboardManager
     lateinit var clipData: ClipData
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        supportActionBar?.hide()
         customizeViewModel = ViewModelProviders.of(this).get(CustomizeViewModel::class.java)
         initView()
 
@@ -93,9 +95,7 @@ class MainActivity : AppCompatActivity() {
         /** Text input listener */
         edtInput.addTextChangedListener(object : TextWatcher{
             override fun afterTextChanged(p0: Editable?) { }
-
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
-
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 tvPreview.text = p0.toString()
                 if(p0?.length == 0){
@@ -136,6 +136,12 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        /** GO to setting page listener */
+        btnSetting.setOnClickListener {
+            val intent = Intent(this, SettingsActivity::class.java)
+            startActivity(intent)
+        }
+
         if (pref.getString("Text", "")!= ""){
             edtInput.setText(pref.getString("Text",""))
         }
@@ -149,6 +155,7 @@ class MainActivity : AppCompatActivity() {
         viewPager = findViewById(R.id.vp_main_setting)
         edtInput = findViewById(R.id.edt_main_input)
         btnShow = findViewById(R.id.btn_main_show)
+        btnSetting = findViewById(R.id.btn_main_setting)
         btnClear = findViewById(R.id.btn_clear)
         btnPaste = findViewById(R.id.btn_paste)
 
@@ -163,6 +170,7 @@ class MainActivity : AppCompatActivity() {
         adapter.setViewModel(customizeViewModel)
         //val inflater = getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         viewPager.adapter = adapter
+        viewPager.isUserInputEnabled = false
         TabLayoutMediator(tabLayout, viewPager){tab, position ->
             tab.text = (when(position){
                 0 -> getString(R.string.tab_customize_style)

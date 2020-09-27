@@ -1,0 +1,19 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/customize">
+
+        <Preference
+            app:key="word_setting"
+            app:title="@string/word_setting"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/about">
+
+        <Preference
+            app:key="about_app"
+            app:title="@string/about_app"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

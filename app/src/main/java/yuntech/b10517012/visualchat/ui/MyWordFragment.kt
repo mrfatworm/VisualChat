@@ -30,10 +30,7 @@ class MyWordFragment : Fragment() {
 
         initView(root)
         initData()
-        val layoutManager = GridLayoutManager(context,2)
-        recyclerView.layoutManager = layoutManager
-        wordAdapter = WordAdapter(wordList, customizeViewModel)
-        recyclerView.adapter = wordAdapter
+        initRecyclerView()
 
         return root
     }
@@ -51,5 +48,13 @@ class MyWordFragment : Fragment() {
 
     private fun initView(root: View) {
         recyclerView = root.findViewById(R.id.recyclerview)
+    }
+
+    private fun initRecyclerView() {
+        val layoutManager = GridLayoutManager(context, 2)
+        recyclerView.layoutManager = layoutManager
+        wordList.reverse()
+        wordAdapter = WordAdapter(wordList, customizeViewModel)
+        recyclerView.adapter = wordAdapter
     }
 }

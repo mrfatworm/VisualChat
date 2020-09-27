@@ -20,11 +20,11 @@ class TextShowActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         // Hide status bar
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         this.window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         setContentView(R.layout.activity_text_show)
+        supportActionBar?.hide()
 
         background = findViewById(R.id.constraintLayout_text_show)
         tvTextShow = findViewById(R.id.tv_text_show)

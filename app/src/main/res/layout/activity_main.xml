@@ -11,7 +11,7 @@
         android:id="@+id/img_main_preview_bg"
         android:layout_width="0dp"
         android:layout_height="220dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/blackboard"
         android:contentDescription="TODO"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
