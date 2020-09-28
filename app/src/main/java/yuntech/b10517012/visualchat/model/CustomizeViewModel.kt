@@ -12,6 +12,8 @@ class CustomizeViewModel : ViewModel() {
     private val _autoFont = MutableLiveData<Boolean>()
     private val _bold = MutableLiveData<Boolean>()
     private val _word = MutableLiveData<String>()
+    private val _flash = MutableLiveData<Boolean>()
+    private var _marquee = MutableLiveData<Boolean>()
 
     val currentColor: LiveData<Int> = _color
     val currentBGColor: LiveData<Int> = _bgColor
@@ -19,6 +21,8 @@ class CustomizeViewModel : ViewModel() {
     val currentAutoFont: LiveData<Boolean> = _autoFont
     val currentBold: LiveData<Boolean> = _bold
     val currentWord: LiveData<String> = _word
+    val currentFlash: LiveData<Boolean> = _flash
+    val currentMarquee: LiveData<Boolean> = _marquee
 
     fun setColor(value: Int) {
         _color.value = value
@@ -42,6 +46,14 @@ class CustomizeViewModel : ViewModel() {
 
     fun setWord(value: String){
         _word.value = value
+    }
+
+    fun setFlash(value: Boolean){
+        _flash.value = value
+    }
+
+    fun setMarquee(value: Boolean){
+        _marquee.value = value
     }
 
     //    val color: LiveData<String> = Transformations.map(_color) {

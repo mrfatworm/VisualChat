@@ -6,8 +6,11 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
+import android.text.TextUtils
 import android.text.TextWatcher
 import android.util.TypedValue
+import android.view.animation.AlphaAnimation
+import android.view.animation.Animation
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -38,6 +41,8 @@ class MainActivity : AppCompatActivity() {
     private var tvSize: Float = 48F
     private var isAuto: Boolean = false
     private var isBold: Boolean = false
+    private var isFlash: Boolean = false
+    private var isMarquee: Boolean = false
     lateinit var pref: SharedPreferences
     lateinit var clipboard: ClipboardManager
     lateinit var clipData: ClipData
@@ -50,9 +55,7 @@ class MainActivity : AppCompatActivity() {
         initView()
 
         /** Text color listener */
-        customizeViewModel.currentColor.observe(this, Observer {
-            tvPreview.setTextColor(it)
-        })
+        customizeViewModel.currentColor.observe(this, Observer { tvPreview.setTextColor(it)})
 
         /** Text color listener */
         customizeViewModel.currentBGColor.observe(this, Observer {
@@ -89,8 +92,41 @@ class MainActivity : AppCompatActivity() {
         })
 
         /** My word listener */
-        customizeViewModel.currentWord.observe(this, Observer {
-            edtInput.setText(it)
+        customizeViewModel.currentWord.observe(this, Observer { edtInput.setText(it) })
+
+        customizeViewModel.currentFlash.observe(this, Observer {
+            if (it){
+                val anim: Animation = AlphaAnimation(0.0f, 1.0f)
+                anim.duration = 500 //You can manage the blinking time with this parameter
+                anim.startOffset = 0
+                anim.repeatMode = Animation.REVERSE
+                anim.repeatCount = Animation.INFINITE
+                tvPreview.startAnimation(anim)
+            }else{
+                tvPreview.clearAnimation()
+            }
+            isFlash = it
+        })
+
+        customizeViewModel.currentMarquee.observe(this, Observer {
+            if(it){
+                tvPreview.apply {
+                    isSelected = true
+                    ellipsize = TextUtils.TruncateAt.MARQUEE
+                    marqueeRepeatLimit = -1
+                    isSingleLine = true
+                    setHorizontallyScrolling(true)
+                }
+            }else {
+                tvPreview.apply {
+                    isSelected = false
+                    ellipsize = TextUtils.TruncateAt.END
+                    marqueeRepeatLimit = 0
+                    isSingleLine = false
+                    setHorizontallyScrolling(false)
+                }
+            }
+            isMarquee = it
         })
 
         /** Text input listener */
@@ -132,6 +168,8 @@ class MainActivity : AppCompatActivity() {
                 putInt("bg", bgColor.color)
                 putBoolean("auto", isAuto)
                 putBoolean("bold", isBold )
+                putBoolean("flash", isFlash)
+                putBoolean("marquee", isMarquee)
             }
             intent.putExtra("format", bundle)
             startActivity(intent)

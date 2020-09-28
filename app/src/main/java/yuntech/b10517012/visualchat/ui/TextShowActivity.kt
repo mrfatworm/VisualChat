@@ -4,9 +4,12 @@ import android.graphics.Typeface
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.TypedValue
 import android.view.Window
 import android.view.WindowManager
+import android.view.animation.AlphaAnimation
+import android.view.animation.Animation
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -45,6 +48,25 @@ class TextShowActivity : AppCompatActivity() {
         }
         if(bundle.getBoolean("bold")){
             tvTextShow.setTypeface(null, Typeface.BOLD)
+        }
+
+        if(bundle.getBoolean("flash")){
+            val anim: Animation = AlphaAnimation(0.0f, 1.0f)
+            anim.duration = 500 //You can manage the blinking time with this parameter
+            anim.startOffset = 0
+            anim.repeatMode = Animation.REVERSE
+            anim.repeatCount = Animation.INFINITE
+            tvTextShow.startAnimation(anim)
+        }
+
+        if(bundle.getBoolean("marquee")) {
+            tvTextShow.apply {
+                isSelected = true
+                ellipsize = TextUtils.TruncateAt.MARQUEE
+                marqueeRepeatLimit = -1
+                isSingleLine = true
+                setHorizontallyScrolling(true)
+            }
         }
 
         // Close TextShowActivity
