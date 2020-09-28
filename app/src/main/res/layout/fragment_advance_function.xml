@@ -6,15 +6,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <Switch
+        android:id="@+id/sw_flash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="施工中"
-        android:textSize="36sp"
-        android:layout_margin="36dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:switchPadding="8dp"
+        android:text="@string/advance_flash"
+        android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/sw_marquee"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Switch
+        android:id="@+id/sw_marquee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:switchPadding="8dp"
+        android:text="@string/advance_marquee"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/sw_flash"
         app:layout_constraintTop_toTopOf="parent" />
 
 

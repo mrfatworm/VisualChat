@@ -22,7 +22,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginStart="12dp"
         android:switchPadding="8dp"
-        android:text="自動"
+        android:text="@string/auto_size"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recyclerview" />
 

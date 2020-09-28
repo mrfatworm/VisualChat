@@ -7,7 +7,6 @@ import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.util.TypedValue
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -16,9 +15,11 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import yuntech.b10517012.visualchat.model.CustomizeViewModel
 import yuntech.b10517012.visualchat.R
 import yuntech.b10517012.visualchat.adapter.ViewPager2Adapter
+import yuntech.b10517012.visualchat.model.CustomizeViewModel
+import yuntech.b10517012.visualchat.model.WordModel
+import yuntech.b10517012.visualchat.sqlite.MyWordDAO
 
 
 class MainActivity : AppCompatActivity() {
@@ -108,14 +109,14 @@ class MainActivity : AppCompatActivity() {
 
         btnClear.setOnClickListener {
             edtInput.text.clear()
-            Toast.makeText(this, "清除", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.clear), Toast.LENGTH_SHORT).show()
         }
 
         btnPaste.setOnClickListener {
             clipData = clipboard.primaryClip as ClipData
             edtInput.setText(edtInput.text.toString() + clipData.getItemAt(0).text)
             edtInput.setSelection(edtInput.text.length)
-            Toast.makeText(this, "貼上", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.paste), Toast.LENGTH_SHORT).show()
         }
 
         /** GO to fullscreen listener */
@@ -160,7 +161,22 @@ class MainActivity : AppCompatActivity() {
         btnPaste = findViewById(R.id.btn_paste)
 
         pref = getSharedPreferences("favor", Context.MODE_PRIVATE)
-
+        if(pref.getBoolean("first", true)){
+            val myWordDAO = MyWordDAO(this)
+            val sample = arrayOf<String>(
+                getString(R.string.sample_01),
+                getString(R.string.sample_02),
+                getString(R.string.sample_03),
+                getString(R.string.sample_04),
+                getString(R.string.sample_05),
+                getString(R.string.sample_06),
+                getString(R.string.sample_07),
+                getString(R.string.sample_08))
+            for(i in sample.indices){
+                myWordDAO.insert(WordModel(0, sample[i],i))
+            }
+            pref.edit().putBoolean("first", false).apply()
+        }
         clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val height = resources.displayMetrics.heightPixels
         val width = resources.displayMetrics.widthPixels

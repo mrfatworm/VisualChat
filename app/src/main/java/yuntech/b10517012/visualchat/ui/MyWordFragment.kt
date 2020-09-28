@@ -11,6 +11,7 @@ import yuntech.b10517012.visualchat.R
 import yuntech.b10517012.visualchat.adapter.WordAdapter
 import yuntech.b10517012.visualchat.model.CustomizeViewModel
 import yuntech.b10517012.visualchat.model.WordModel
+import yuntech.b10517012.visualchat.sqlite.MyWordDAO
 import java.util.*
 
 class MyWordFragment : Fragment() {
@@ -36,14 +37,8 @@ class MyWordFragment : Fragment() {
     }
 
     private fun initData() {
-        wordList.add(WordModel(1, "謝謝你"))
-        wordList.add(WordModel(2, "了解"))
-        wordList.add(WordModel(3, "好的"))
-        wordList.add(WordModel(4, "瞧你那啥逼樣，信不信老子打死你"))
-        wordList.add(WordModel(5, "珍珠紅茶拿鐵，全糖去冰，幹嘛？拎北臺南人啦"))
-        wordList.add(WordModel(6, "這邊請"))
-        wordList.add(WordModel(7, "早安"))
-        wordList.add(WordModel(8, "+1"))
+        val myWordDAO = MyWordDAO(context)
+        wordList.addAll(myWordDAO.getAll()!!)
     }
 
     private fun initView(root: View) {

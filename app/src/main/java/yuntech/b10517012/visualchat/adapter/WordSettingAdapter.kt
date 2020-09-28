@@ -1,26 +1,23 @@
 package yuntech.b10517012.visualchat.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import yuntech.b10517012.visualchat.model.CustomizeViewModel
 import yuntech.b10517012.visualchat.R
 import yuntech.b10517012.visualchat.model.WordModel
 import yuntech.b10517012.visualchat.ui.IEditWord
 
 class WordSettingAdapter : RecyclerView.Adapter<WordSettingAdapter.ViewHolder>{
     private var data: List<WordModel>
-    private val iview: IEditWord
+    private val iView: IEditWord
 
-    constructor(data: List<WordModel>, iview: IEditWord): super(){
+    constructor(data: List<WordModel>, iView: IEditWord): super(){
         this.data = data
-        this.iview = iview
+        this.iView = iView
     }
 
     class ViewHolder:RecyclerView.ViewHolder{
@@ -47,7 +44,7 @@ class WordSettingAdapter : RecyclerView.Adapter<WordSettingAdapter.ViewHolder>{
         holder.textView.text = model.sentence
 
         holder.textView.setOnClickListener{
-            iview.alertEditWord(position,model.sentence)
+            iView.alertEditWord(model.id,model.sentence)
         }
     }
 }
