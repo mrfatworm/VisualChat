@@ -12,9 +12,8 @@
     <string name="text_preview">Preview</string>
     <string name="clear">Clear</string>
     <string name="paste">Paste</string>
-    <string name="new_word">New </string>
-    <string name="mod_word">Edit</string>
-    <string name="word">vocabulary</string>
+    <string name="new_word">New vocabulary</string>
+    <string name="mod_word">Edit vocabulary</string>
     <string name="word_setting_hint">Long press to Sort, right swipe to delete</string>
     <string name="visual_effect">Visual Effects</string>
     <string name="advance_blink">Blink Mode</string>

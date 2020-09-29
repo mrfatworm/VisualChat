@@ -101,7 +101,7 @@ class MyWordSettingActivity : AppCompatActivity(), IEditWord {
         }
         edtAdd.setText(word)
         val builder = AlertDialog.Builder(this)
-            .setTitle(title + getString(R.string.word))
+            .setTitle(title)
             .setView(itemView)
             .setPositiveButton(title){ _, _ ->
                 if (edtAdd.text.toString() == ""){}

@@ -1,0 +1,43 @@
+<resources>
+    <!--    app name-->
+    <string name="app_name">VisualChat</string>
+
+    <!-- Main Category -->
+    <string name="tab_customize_style">字型色彩</string>
+    <string name="tab_my_word">词汇</string>
+    <string name="tab_advance_function">进阶功能</string>
+
+    <string name="auto_font_warning">此功能仅支援 Android 8.0 或更新版本系统</string>
+    <string name="auto_size">自动</string>
+    <string name="text_preview">文字预览</string>
+    <string name="clear">清除</string>
+    <string name="paste">粘贴</string>
+    <string name="new_word">新增词汇</string>
+    <string name="mod_word">修改词汇</string>
+    <string name="word_setting_hint">长按拖曳 右滑删除</string>
+    <string name="advance_blink">闪烁模式</string>
+    <string name="advance_marquee">跑马灯</string>
+    <string name="visual_effect">视觉特效</string>
+
+
+    <!-- Setting Category -->
+    <string name="customize">个性化</string>
+    <string name="about">关于</string>
+
+    <!-- Setting Titles -->
+    <string name="title_activity_settings">设置</string>
+    <string name="word_setting">词汇设置</string>
+    <string name="about_app">关于本 APP </string>
+
+    <!--    Sample data-->
+    <string name="sample_01">谢谢</string>
+    <string name="sample_02">不要紧</string>
+    <string name="sample_06">请多指教</string>
+    <string name="sample_03">早上好</string>
+    <string name="sample_04">一同吃晚餐吗</string>
+    <string name="sample_05">領導說這個月有特別獎金 !!!</string>
+    <string name="sample_07">今天下午似乎会下雨</string>
+    <string name="sample_08">对不起 可以麻烦再说一遍吗</string>
+    <string name="designer">by Mr. Fatworm</string>
+
+</resources>
