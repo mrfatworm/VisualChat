@@ -60,7 +60,7 @@ class CustomizeStyleFragment : Fragment() {
 
         seekBar.setOnSeekBarChangeListener(object :SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
-                customizeViewModel.setFont((p1*10).toFloat())
+                customizeViewModel.setFont((p1*5).toFloat())
                 pref.edit().putInt("FontSize", p1).apply()
             }
             override fun onStartTrackingTouch(p0: SeekBar?) { }

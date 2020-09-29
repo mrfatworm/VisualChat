@@ -23,6 +23,7 @@ import yuntech.b10517012.visualchat.adapter.ViewPager2Adapter
 import yuntech.b10517012.visualchat.model.CustomizeViewModel
 import yuntech.b10517012.visualchat.model.WordModel
 import yuntech.b10517012.visualchat.sqlite.MyWordDAO
+import java.lang.Exception
 
 
 class MainActivity : AppCompatActivity() {
@@ -149,9 +150,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnPaste.setOnClickListener {
-            clipData = clipboard.primaryClip as ClipData
-            edtInput.setText(edtInput.text.toString() + clipData.getItemAt(0).text)
-            edtInput.setSelection(edtInput.text.length)
+            try {
+                clipData = clipboard.primaryClip as ClipData
+                edtInput.setText(edtInput.text.toString() + clipData.getItemAt(0).text)
+                edtInput.setSelection(edtInput.text.length)
+            }catch (e: Exception){ }
             Toast.makeText(this, getString(R.string.paste), Toast.LENGTH_SHORT).show()
         }
 
@@ -211,7 +214,7 @@ class MainActivity : AppCompatActivity() {
                 getString(R.string.sample_07),
                 getString(R.string.sample_08))
             for(i in sample.indices){
-                myWordDAO.insert(WordModel(0, sample[i],i))
+                myWordDAO.insert(WordModel(0, sample[i], i+1))
             }
             pref.edit().putBoolean("first", false).apply()
         }
