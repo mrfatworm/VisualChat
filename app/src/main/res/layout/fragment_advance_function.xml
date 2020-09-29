@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:switchPadding="8dp"
-        android:text="@string/advance_flash"
+        android:text="@string/advance_blink"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/sw_marquee"

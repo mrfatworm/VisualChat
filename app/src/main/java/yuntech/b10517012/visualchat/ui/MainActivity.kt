@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity() {
         /** My word listener */
         customizeViewModel.currentWord.observe(this, Observer { edtInput.setText(it) })
 
-        customizeViewModel.currentFlash.observe(this, Observer {
+        customizeViewModel.currentBlink.observe(this, Observer {
             if (it){
                 val anim: Animation = AlphaAnimation(0.0f, 1.0f)
                 anim.duration = 500 //You can manage the blinking time with this parameter

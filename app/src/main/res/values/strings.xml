@@ -3,42 +3,42 @@
     <string name="app_name">VisualChat</string>
 
     <!-- Main Category -->
-    <string name="tab_customize_style">字型色彩</string>
-    <string name="tab_my_word">常用詞庫</string>
-    <string name="tab_advance_function">進階功能</string>
+    <string name="tab_customize_style">Font</string>
+    <string name="tab_my_word">Vocabulary</string>
+    <string name="tab_advance_function">Advanced</string>
 
-    <string name="auto_font_warning">此功能僅支援 Android 8.0 或更新版本系統</string>
-    <string name="auto_size">自動</string>
-    <string name="text_preview">文字預覽</string>
-    <string name="clear">清除</string>
-    <string name="paste">貼上</string>
-    <string name="new_word">新增</string>
-    <string name="mod_word">修改</string>
-    <string name="word">詞句</string>
+    <string name="auto_font_warning">This feature only supports Android 8.0 and newer</string>
+    <string name="auto_size">Auto</string>
+    <string name="text_preview">Preview</string>
+    <string name="clear">Clear</string>
+    <string name="paste">Paste</string>
+    <string name="new_word">New </string>
+    <string name="mod_word">Edit</string>
+    <string name="word">vocabulary</string>
+    <string name="word_setting_hint">Long press to Sort, right swipe to delete</string>
+    <string name="visual_effect">Visual Effects</string>
+    <string name="advance_blink">Blink Mode</string>
+    <string name="advance_marquee">Marquee</string>
 
     <!-- Setting Category -->
-    <string name="customize">個人化</string>
-    <string name="about">關於</string>
+    <string name="customize">Customization</string>
+    <string name="about">About</string>
 
     <!-- Setting Titles -->
-    <string name="title_activity_settings">設定</string>
-    <string name="word_setting">詞庫設定</string>
-    <string name="about_app">關於本 APP </string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="word_setting">Vocabulary configuration</string>
+    <string name="about_app">About this APP </string>
 
     <!--    Sample data-->
-    <string name="sample_01">謝謝</string>
-    <string name="sample_02">沒關係</string>
-    <string name="sample_06">請多指教</string>
-    <string name="sample_03">早安</string>
-    <string name="sample_04">要一起去吃晚餐嗎</string>
-    <string name="sample_05">主管說這個月有特別獎金 !!!</string>
-    <string name="sample_07">今天下午似乎會下雨</string>
-    <string name="sample_08">對不起 可以麻煩再說一遍嗎</string>
-    <string name="version">Beta Version</string>
-    <string name="designer">by Mr.Fatworm</string>
-    <string name="word_setting_hint">小提示：長按拖曳 右滑刪除</string>
-    <string name="advance_flash">閃爍模式</string>
-    <string name="advance_marquee">跑馬燈</string>
+    <string name="sample_01">Thanks</string>
+    <string name="sample_02">It\'s OK</string>
+    <string name="sample_06">Nice to meet you</string>
+    <string name="sample_03">Good morning</string>
+    <string name="sample_04">Let\'s HAVE dinner</string>
+    <string name="sample_05">The supervisor said there will be a special bonus this month !!!</string>
+    <string name="sample_07">It seems like going to rain</string>
+    <string name="sample_08">Would you mind spelling that out for me?</string>
+    <string name="designer">by Mr. Fatworm</string>
 
 
 </resources>

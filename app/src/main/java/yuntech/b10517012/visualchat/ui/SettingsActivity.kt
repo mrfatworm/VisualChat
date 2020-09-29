@@ -1,11 +1,8 @@
 package yuntech.b10517012.visualchat.ui
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentManager
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import yuntech.b10517012.visualchat.R
@@ -26,7 +23,7 @@ class SettingsActivity : AppCompatActivity() {
 
     class SettingsFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-            setPreferencesFromResource(R.xml.root_preferences, rootKey)
+            setPreferencesFromResource(R.xml.setting_preferences, rootKey)
             val prefWordSetting = findPreference<Preference>("word_setting")
             val prefAboutApp = findPreference<Preference>("about_app")
 
