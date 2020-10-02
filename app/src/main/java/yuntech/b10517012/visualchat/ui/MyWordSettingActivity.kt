@@ -17,7 +17,6 @@ import yuntech.b10517012.visualchat.R
 import yuntech.b10517012.visualchat.adapter.WordSettingAdapter
 import yuntech.b10517012.visualchat.model.WordModel
 import yuntech.b10517012.visualchat.sqlite.MyWordDAO
-import java.util.*
 import kotlin.collections.ArrayList
 
 
@@ -107,8 +106,7 @@ class MyWordSettingActivity : AppCompatActivity(), IEditWord {
             .setTitle(title)
             .setView(itemView)
             .setPositiveButton(btnText){ _, _ ->
-                if (edtAdd.text.toString() == ""){}
-                else if (title == getString(R.string.new_word)){
+                if (title == getString(R.string.new_word)){
                     myWordDAO.insert(WordModel(0, edtAdd.text.toString(), myWordDAO.getLargestOrder()+1))
                     updateData()
                     adapter.notifyDataSetChanged()
@@ -123,7 +121,7 @@ class MyWordSettingActivity : AppCompatActivity(), IEditWord {
             }
         // Soft keyboard auto show up
         val dialog: AlertDialog = builder.create()
-        dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
         edtAdd.requestFocus()
         dialog.show()
     }

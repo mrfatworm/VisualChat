@@ -1,5 +1,6 @@
 package yuntech.b10517012.visualchat.ui
 
+import android.annotation.SuppressLint
 import android.content.*
 import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
@@ -14,7 +15,7 @@ import android.view.animation.Animation
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -45,14 +46,15 @@ class MainActivity : AppCompatActivity() {
     private var isFlash: Boolean = false
     private var isMarquee: Boolean = false
     lateinit var pref: SharedPreferences
-    lateinit var clipboard: ClipboardManager
-    lateinit var clipData: ClipData
+    private lateinit var clipboard: ClipboardManager
+    private lateinit var clipData: ClipData
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
-        customizeViewModel = ViewModelProviders.of(this).get(CustomizeViewModel::class.java)
+        customizeViewModel = ViewModelProvider(this).get(CustomizeViewModel::class.java)
         initView()
 
         /** Text color listener */
@@ -160,8 +162,8 @@ class MainActivity : AppCompatActivity() {
 
         /** GO to fullscreen listener */
         btnShow.setOnClickListener {
-            var intent = Intent(this, TextShowActivity::class.java)
-            var bundle = Bundle()
+            val intent = Intent(this, TextShowActivity::class.java)
+            val bundle = Bundle()
             val bgColor = imgBG.background as ColorDrawable
 
             bundle.apply {
@@ -204,7 +206,7 @@ class MainActivity : AppCompatActivity() {
         pref = getSharedPreferences("favor", Context.MODE_PRIVATE)
         if(pref.getBoolean("first", true)){
             val myWordDAO = MyWordDAO(this)
-            val sample = arrayOf<String>(
+            val sample = arrayOf(
                 getString(R.string.sample_01),
                 getString(R.string.sample_02),
                 getString(R.string.sample_03),

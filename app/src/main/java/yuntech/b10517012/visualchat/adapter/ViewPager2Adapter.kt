@@ -11,7 +11,7 @@ import yuntech.b10517012.visualchat.ui.MyWordFragment
 class ViewPager2Adapter(fragmentActivity: FragmentActivity) :
     FragmentStateAdapter(fragmentActivity) {
 
-    private lateinit var customizeViewModel: CustomizeViewModel;
+    private lateinit var customizeViewModel: CustomizeViewModel
 
     override fun createFragment(position: Int): Fragment {
         return when(position){

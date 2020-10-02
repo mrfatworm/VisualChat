@@ -33,7 +33,7 @@ class TextShowActivity : AppCompatActivity() {
         tvTextShow = findViewById(R.id.tv_text_show)
         btnClose = findViewById(R.id.btn_close_show)
 
-        val bundle = intent.getBundleExtra("format")
+        val bundle = intent.getBundleExtra("format")!!
         val height = resources.displayMetrics.heightPixels
         val width = resources.displayMetrics.widthPixels
         tvTextShow.apply {

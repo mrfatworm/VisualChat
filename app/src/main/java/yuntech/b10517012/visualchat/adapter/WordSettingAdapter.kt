@@ -5,25 +5,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import yuntech.b10517012.visualchat.R
 import yuntech.b10517012.visualchat.model.WordModel
 import yuntech.b10517012.visualchat.ui.IEditWord
 
-class WordSettingAdapter : RecyclerView.Adapter<WordSettingAdapter.ViewHolder>{
-    private var data: List<WordModel>
-    private val iView: IEditWord
+class WordSettingAdapter(private var data: List<WordModel>, private val iView: IEditWord) :
+    RecyclerView.Adapter<WordSettingAdapter.ViewHolder>() {
 
-    constructor(data: List<WordModel>, iView: IEditWord): super(){
-        this.data = data
-        this.iView = iView
-    }
-
-    class ViewHolder:RecyclerView.ViewHolder{
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         lateinit var textView: TextView
         lateinit var imageButton: ImageButton
-        constructor(itemView: View): super(itemView)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

@@ -153,7 +153,7 @@ class MyWordDAO// 建構子，一般的應用都不需要修改
     }
 
     // 把Cursor目前的資料包裝為物件
-    fun getRecord(cursor: Cursor): WordModel {
+    private fun getRecord(cursor: Cursor): WordModel {
         // 準備回傳結果用的物件
         val result = WordModel()
         result.id = cursor.getLong(0)

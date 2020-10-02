@@ -1,9 +1,5 @@
 package yuntech.b10517012.visualchat.model
 
-import android.content.ContentValues
-import android.database.Cursor
-import yuntech.b10517012.visualchat.sqlite.MyWordDAO
-
 class WordModel {
     var id: Long = 0
     var sentence: String = ""
@@ -15,5 +11,5 @@ class WordModel {
         this.sentence = sentence
         this.order = order
     }
-    constructor(){}
+    constructor()
 }

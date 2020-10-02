@@ -1,7 +1,6 @@
 package yuntech.b10517012.visualchat.ui
 
 import android.os.Bundle
-import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
 import yuntech.b10517012.visualchat.model.CustomizeViewModel

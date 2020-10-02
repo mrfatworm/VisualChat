@@ -4,25 +4,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
-import yuntech.b10517012.visualchat.model.ColorModel
 import yuntech.b10517012.visualchat.model.CustomizeViewModel
 import yuntech.b10517012.visualchat.R
 import yuntech.b10517012.visualchat.model.WordModel
 
-class WordAdapter : RecyclerView.Adapter<WordAdapter.ViewHolder>{
-    private var data: List<WordModel>
-    private var customizeViewModel: CustomizeViewModel
+class WordAdapter(
+    private var data: List<WordModel>,
+    private var customizeViewModel: CustomizeViewModel) : RecyclerView.Adapter<WordAdapter.ViewHolder>() {
 
-    constructor(data: List<WordModel>, customizeViewModel: CustomizeViewModel): super(){
-        this.data = data
-        this.customizeViewModel = customizeViewModel
-    }
-
-    class ViewHolder:RecyclerView.ViewHolder{
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         lateinit var textView: TextView
-        constructor(itemView: View): super(itemView)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

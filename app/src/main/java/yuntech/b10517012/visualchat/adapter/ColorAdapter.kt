@@ -11,22 +11,14 @@ import yuntech.b10517012.visualchat.model.ColorModel
 import yuntech.b10517012.visualchat.model.CustomizeViewModel
 import yuntech.b10517012.visualchat.R
 
-class ColorAdapter : RecyclerView.Adapter<ColorAdapter.ViewHolder>{
-    private var data: Array<ColorModel>
-    private var customizeViewModel: CustomizeViewModel
-    private var pref: SharedPreferences
+class ColorAdapter(
+    private var data: Array<ColorModel>,
+    private var customizeViewModel: CustomizeViewModel,
+    private var pref: SharedPreferences) : RecyclerView.Adapter<ColorAdapter.ViewHolder>() {
 
-    constructor(data: Array<ColorModel>, customizeViewModel: CustomizeViewModel
-                , pref: SharedPreferences): super(){
-        this.data = data
-        this.customizeViewModel = customizeViewModel
-        this.pref = pref
-    }
-
-    class ViewHolder:RecyclerView.ViewHolder{
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         lateinit var textView: TextView
         lateinit var cardView: CardView
-        constructor(itemView: View): super(itemView)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
