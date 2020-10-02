@@ -4,7 +4,7 @@
 
     <!-- Main Category -->
     <string name="tab_customize_style">字型色彩</string>
-    <string name="tab_my_word">詞彙</string>
+    <string name="tab_my_word">句集</string>
     <string name="tab_advance_function">進階功能</string>
 
     <string name="auto_font_warning">此功能僅支援 Android 8.0 或更新版本系統</string>
@@ -12,8 +12,10 @@
     <string name="text_preview">文字預覽</string>
     <string name="clear">清除</string>
     <string name="paste">貼上</string>
-    <string name="new_word">新增詞彙</string>
-    <string name="mod_word">修改詞彙</string>
+    <string name="new_word">新增句子</string>
+    <string name="mod_word">修改句子</string>
+    <string name="add">新增</string>
+    <string name="mod">修改</string>
     <string name="word_setting_hint">長按拖曳 右滑刪除</string>
     <string name="advance_blink">閃爍模式</string>
     <string name="advance_marquee">跑馬燈</string>
@@ -26,7 +28,7 @@
 
     <!-- Setting Titles -->
     <string name="title_activity_settings">設定</string>
-    <string name="word_setting">詞彙設定</string>
+    <string name="word_setting">句集設定</string>
     <string name="about_app">關於本 APP </string>
 
     <!--    Sample data-->
@@ -40,4 +42,12 @@
     <string name="sample_08">對不起 可以麻煩再說一遍嗎</string>
     <string name="designer">by Mr. Fatworm</string>
 
+    <!-- Hint-->
+    <string name="full_screen">全螢幕</string>
+    <string name="type_here">在此輸入</string>
+    <string name="logo">Logo</string>
+    <string name="leave_full_screen">離開全螢幕</string>
+    <string name="color_list_text">A</string>
+    <string name="font_size">字型大小</string>
+    <string name="bold">自動</string>
 </resources>

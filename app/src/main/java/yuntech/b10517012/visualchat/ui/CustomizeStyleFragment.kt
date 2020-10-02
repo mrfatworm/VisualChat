@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.switchmaterial.SwitchMaterial
 import yuntech.b10517012.visualchat.model.ColorModel
 import yuntech.b10517012.visualchat.model.CustomizeViewModel
 import yuntech.b10517012.visualchat.R
@@ -24,7 +25,7 @@ class CustomizeStyleFragment : Fragment() {
 
     private lateinit var customizeViewModel: CustomizeViewModel;
     private lateinit var recyclerView: RecyclerView
-    private lateinit var swAuto: Switch
+    private lateinit var swAuto: SwitchMaterial
     private lateinit var seekBar: SeekBar
     private lateinit var cbBold: CheckBox
     private lateinit var pref: SharedPreferences
@@ -39,7 +40,7 @@ class CustomizeStyleFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_customize_style, container, false)
         initView(root)
 
-        pref = this.context!!.getSharedPreferences("favor", Context.MODE_PRIVATE)
+        pref = this.requireContext().getSharedPreferences("favor", Context.MODE_PRIVATE)
 
         initRecyclerview()
 
@@ -60,7 +61,7 @@ class CustomizeStyleFragment : Fragment() {
 
         seekBar.setOnSeekBarChangeListener(object :SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
-                customizeViewModel.setFont((p1*5).toFloat())
+                customizeViewModel.setFont(((p1 + 2)*5).toFloat())
                 pref.edit().putInt("FontSize", p1).apply()
             }
             override fun onStartTrackingTouch(p0: SeekBar?) { }
@@ -102,7 +103,7 @@ class CustomizeStyleFragment : Fragment() {
     }
 
     private fun sampleColorData(): Array<ColorModel> {
-        val dataArray = Array(12){ ColorModel(0,0) }
+        val dataArray = Array(17){ ColorModel(0,0) }
         dataArray[0].apply {
             textColor = Color.WHITE
             bgColor = resources.getColor(R.color.blackboard) }
@@ -126,21 +127,34 @@ class CustomizeStyleFragment : Fragment() {
             bgColor = Color.BLACK }
         dataArray[7].apply {
             textColor = resources.getColor(R.color.skin)
-            bgColor = resources.getColor(R.color.navy) }
+            bgColor = resources.getColor(R.color.black) }
         dataArray[8].apply {
+            textColor = resources.getColor(R.color.skin)
+            bgColor = resources.getColor(R.color.navy) }
+        dataArray[9].apply {
+            textColor = resources.getColor(R.color.pttYellow)
+            bgColor = resources.getColor(R.color.navy) }
+        dataArray[10].apply {
+            textColor = resources.getColor(R.color.black)
+            bgColor = resources.getColor(R.color.lightYellow) }
+        dataArray[11].apply {
             textColor = resources.getColor(R.color.navy)
             bgColor = resources.getColor(R.color.lightYellow) }
-        dataArray[9].apply {
+        dataArray[12].apply {
             textColor = resources.getColor(R.color.pink)
             bgColor = resources.getColor(R.color.lightYellow) }
-        dataArray[10].apply {
+        dataArray[13].apply {
             textColor = Color.WHITE
             bgColor = resources.getColor(R.color.pink) }
-        dataArray[11].apply {
+        dataArray[14].apply {
             textColor = Color.BLACK
             bgColor = resources.getColor(R.color.pttYellow) }
-
-
+        dataArray[15].apply {
+            textColor = resources.getColor(R.color.navy)
+            bgColor = resources.getColor(R.color.pttYellow) }
+        dataArray[16].apply {
+            textColor = resources.getColor(R.color.white)
+            bgColor = resources.getColor(R.color.colorPrimaryDark) }
 
         return dataArray
     }

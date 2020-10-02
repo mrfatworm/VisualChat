@@ -10,6 +10,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_add_text_box"
+        android:autofillHints="@string/type_here"
+        android:hint="@string/type_here"
         android:maxLines="8"
         android:inputType="textMultiLine"
         android:paddingStart="16dp"

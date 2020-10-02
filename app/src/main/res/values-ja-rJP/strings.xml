@@ -4,7 +4,7 @@
 
     <!-- Main Category -->
     <string name="tab_customize_style">フォントの色</string>
-    <string name="tab_my_word">語彙</string>
+    <string name="tab_my_word">句集</string>
     <string name="tab_advance_function">高度な機能</string>
 
     <string name="auto_font_warning">この機能は Android8.0 以降のバージョンのみをサポートします</string>
@@ -12,10 +12,12 @@
     <string name="text_preview">テキストプレビュー</string>
     <string name="clear">削除</string>
     <string name="paste">ペースト</string>
-    <string name="new_word">新しい単語</string>
-    <string name="mod_word">語彙を変更する</string>
+    <string name="new_word">新しい文</string>
+    <string name="mod_word">文を変更する</string>
+    <string name="add">追加</string>
+    <string name="mod">変更する</string>
     <string name="word_setting_hint">長押しして並べ替え、右にスライドして削除</string>
-    <string name="advance_blink">フラッシュモード</string>
+    <string name="advance_blink">点滅モード</string>
     <string name="advance_marquee">自動スクロール</string>
     <string name="visual_effect">視覚効果</string>
 
@@ -26,7 +28,7 @@
 
     <!-- Setting Titles -->
     <string name="title_activity_settings">セットアップ</string>
-    <string name="word_setting">語彙設定</string>
+    <string name="word_setting">句集設定</string>
     <string name="about_app">このアプリについて</string>
 
     <!--    Sample data-->
@@ -39,5 +41,14 @@
     <string name="sample_07">今日は雨が降るようです</string>
     <string name="sample_08">すみません、もう一度言ってもらえますか</string>
     <string name="designer">by Mr. Fatworm</string>
+
+    <!-- Hint-->
+    <string name="full_screen">全画面表示</string>
+    <string name="type_here">ここに入力</string>
+    <string name="logo">Logo</string>
+    <string name="leave_full_screen">全画面表示のままにする</string>
+    <string name="color_list_text">A</string>
+    <string name="font_size">フォントサイズ</string>
+    <string name="bold">自動</string>
 
 </resources>

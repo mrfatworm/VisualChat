@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -14,12 +15,14 @@
         app:layout_constraintTop_toTopOf="parent">
     </androidx.recyclerview.widget.RecyclerView>
 
-    <Switch
+    <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/sw_font_auto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/auto_size"
         android:layout_marginTop="24dp"
         android:layout_marginStart="12dp"
+        android:padding="8dp"
         android:switchPadding="8dp"
         android:text="@string/auto_size"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,10 +32,10 @@
         android:id="@+id/seekBar_font"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:contentDescription="@string/font_size"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:max="30"
-        android:min="2"
         app:layout_constraintBottom_toBottomOf="@+id/sw_font_auto"
         app:layout_constraintEnd_toStartOf="@+id/cb_font_bold"
         app:layout_constraintStart_toEndOf="@+id/sw_font_auto"
@@ -42,7 +45,9 @@
         android:id="@+id/cb_font_bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/bold"
         android:layout_marginEnd="24dp"
+        android:padding="8dp"
         android:button="@drawable/selector_bold"
         android:scaleX="1.5"
         android:scaleY="1.5"

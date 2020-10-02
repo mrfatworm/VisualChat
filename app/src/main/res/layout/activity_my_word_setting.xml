@@ -25,6 +25,7 @@
         android:id="@+id/fab_add_word"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/new_word"
         android:layout_gravity="bottom|end"
         android:layout_margin="18dp"
         app:layout_constraintBottom_toBottomOf="parent"

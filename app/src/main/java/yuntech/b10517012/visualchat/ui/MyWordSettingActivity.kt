@@ -94,16 +94,19 @@ class MyWordSettingActivity : AppCompatActivity(), IEditWord {
         val edtAdd = itemView.findViewById<EditText>(R.id.edt_add_input)
         edtAdd.setText(word)
         val title: String
-        title = if (edtAdd.text.toString() == ""){
-            getString(R.string.new_word)
+        val btnText: String
+        if (edtAdd.text.toString() == ""){
+            title = getString(R.string.new_word)
+            btnText = getString(R.string.add)
         }else{
-            getString(R.string.mod_word)
+            title = getString(R.string.mod_word)
+            btnText = getString(R.string.mod)
         }
         edtAdd.setText(word)
         val builder = AlertDialog.Builder(this)
             .setTitle(title)
             .setView(itemView)
-            .setPositiveButton(title){ _, _ ->
+            .setPositiveButton(btnText){ _, _ ->
                 if (edtAdd.text.toString() == ""){}
                 else if (title == getString(R.string.new_word)){
                     myWordDAO.insert(WordModel(0, edtAdd.text.toString(), myWordDAO.getLargestOrder()+1))
