@@ -7,12 +7,20 @@
         <SwitchPreference
             app:key="blink"
             app:iconSpaceReserved="false"
+            app:defaultValue="0"
             app:title="@string/advance_blink"/>
 
         <SwitchPreference
             app:key="marquee"
             app:iconSpaceReserved="false"
+            app:defaultValue="false"
             app:title="@string/advance_marquee"/>
+
+        <SwitchPreference
+            app:key="table_mode"
+            app:iconSpaceReserved="false"
+            app:defaultValue="false"
+            app:title="@string/table_mode"/>
 
     </PreferenceCategory>
 

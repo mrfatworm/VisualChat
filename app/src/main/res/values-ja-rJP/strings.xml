@@ -19,6 +19,7 @@
     <string name="word_setting_hint">長押しして並べ替え、右にスライドして削除</string>
     <string name="advance_blink">点滅モード</string>
     <string name="advance_marquee">自動スクロール</string>
+    <string name="table_mode">テーブルモード </string>
     <string name="visual_effect">視覚効果</string>
 
 
@@ -40,7 +41,7 @@
     <string name="sample_05">監督は今月特別ボーナスがあると言った !!!</string>
     <string name="sample_07">今日は雨が降るようです</string>
     <string name="sample_08">すみません、もう一度言ってもらえますか</string>
-    <string name="designer">by Mr. Fatworm</string>
+    <string name="designer">by mrfatworm</string>
 
     <!-- Hint-->
     <string name="full_screen">全画面表示</string>

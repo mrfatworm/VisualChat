@@ -1,7 +1,10 @@
 package yuntech.b10517012.visualchat.ui
 
 import android.annotation.SuppressLint
-import android.content.*
+import android.content.ClipboardManager
+import android.content.Context
+import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Typeface
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
@@ -10,9 +13,11 @@ import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
 import android.util.TypedValue
+import android.view.LayoutInflater
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -24,8 +29,6 @@ import yuntech.b10517012.visualchat.adapter.ViewPager2Adapter
 import yuntech.b10517012.visualchat.model.CustomizeViewModel
 import yuntech.b10517012.visualchat.model.WordModel
 import yuntech.b10517012.visualchat.sqlite.MyWordDAO
-import java.lang.Exception
-
 
 class MainActivity : AppCompatActivity() {
 
@@ -39,7 +42,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var btnShow: ImageButton
     private lateinit var btnSetting: ImageButton
     private lateinit var btnClear: ImageButton
-    private lateinit var btnPaste: ImageButton
+    private lateinit var btnAddWord: ImageButton
+    private lateinit var myWordDAO: MyWordDAO
     private var tvSize: Float = 48F
     private var isAuto: Boolean = false
     private var isBold: Boolean = false
@@ -47,7 +51,6 @@ class MainActivity : AppCompatActivity() {
     private var isMarquee: Boolean = false
     lateinit var pref: SharedPreferences
     private lateinit var clipboard: ClipboardManager
-    private lateinit var clipData: ClipData
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -132,6 +135,14 @@ class MainActivity : AppCompatActivity() {
             isMarquee = it
         })
 
+        customizeViewModel.currentTable.observe(this, Observer {
+            if (it){
+                tvPreview.rotation = 180F
+            }else{
+                tvPreview.rotation = 0F
+            }
+        })
+
         /** Text input listener */
         edtInput.addTextChangedListener(object : TextWatcher{
             override fun afterTextChanged(p0: Editable?) { }
@@ -151,13 +162,18 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, getString(R.string.clear), Toast.LENGTH_SHORT).show()
         }
 
-        btnPaste.setOnClickListener {
-            try {
-                clipData = clipboard.primaryClip as ClipData
-                edtInput.setText(edtInput.text.toString() + clipData.getItemAt(0).text)
-                edtInput.setSelection(edtInput.text.length)
-            }catch (e: Exception){ }
-            Toast.makeText(this, getString(R.string.paste), Toast.LENGTH_SHORT).show()
+        btnAddWord.setOnClickListener {
+            val itemView = LayoutInflater.from(this).inflate(R.layout.alert_add_word, null)
+            val edtAdd = itemView.findViewById<EditText>(R.id.edt_add_input)
+            edtAdd.setText(tvPreview.text)
+            val builder = AlertDialog.Builder(this)
+                .setTitle(R.string.new_word)
+                .setView(itemView)
+                .setPositiveButton(R.string.add){ _, _ ->
+                    myWordDAO.insert(WordModel(0, edtAdd.text.toString(), myWordDAO.getLargestOrder()+1))
+                    //updateData()
+                    adapter.notifyDataSetChanged()
+                }.show()
         }
 
         /** GO to fullscreen listener */
@@ -201,7 +217,8 @@ class MainActivity : AppCompatActivity() {
         btnShow = findViewById(R.id.btn_main_show)
         btnSetting = findViewById(R.id.btn_main_setting)
         btnClear = findViewById(R.id.btn_clear)
-        btnPaste = findViewById(R.id.btn_paste)
+        btnAddWord = findViewById(R.id.btn_paste)
+        myWordDAO = MyWordDAO(this)
 
         pref = getSharedPreferences("favor", Context.MODE_PRIVATE)
         if(pref.getBoolean("first", true)){

@@ -1,8 +1,8 @@
 package yuntech.b10517012.visualchat.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import yuntech.b10517012.visualchat.BuildConfig
 import yuntech.b10517012.visualchat.R
 

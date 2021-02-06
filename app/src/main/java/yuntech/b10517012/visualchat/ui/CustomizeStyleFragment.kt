@@ -16,10 +16,10 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.switchmaterial.SwitchMaterial
-import yuntech.b10517012.visualchat.model.ColorModel
-import yuntech.b10517012.visualchat.model.CustomizeViewModel
 import yuntech.b10517012.visualchat.R
 import yuntech.b10517012.visualchat.adapter.ColorAdapter
+import yuntech.b10517012.visualchat.model.ColorModel
+import yuntech.b10517012.visualchat.model.CustomizeViewModel
 
 class CustomizeStyleFragment : Fragment() {
 

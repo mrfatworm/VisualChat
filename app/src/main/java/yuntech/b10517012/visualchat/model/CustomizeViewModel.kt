@@ -14,6 +14,7 @@ class CustomizeViewModel : ViewModel() {
     private val _word = MutableLiveData<String>()
     private val _blink = MutableLiveData<Boolean>()
     private var _marquee = MutableLiveData<Boolean>()
+    private var _table = MutableLiveData<Boolean>()
 
     val currentColor: LiveData<Int> = _color
     val currentBGColor: LiveData<Int> = _bgColor
@@ -23,6 +24,7 @@ class CustomizeViewModel : ViewModel() {
     val currentWord: LiveData<String> = _word
     val currentBlink: LiveData<Boolean> = _blink
     val currentMarquee: LiveData<Boolean> = _marquee
+    val currentTable: LiveData<Boolean> = _table
 
     fun setColor(value: Int) {
         _color.value = value
@@ -54,6 +56,10 @@ class CustomizeViewModel : ViewModel() {
 
     fun setMarquee(value: Boolean){
         _marquee.value = value
+    }
+
+    fun setTable(value: Boolean){
+        _table.value = value
     }
 
     //    val color: LiveData<String> = Transformations.map(_color) {

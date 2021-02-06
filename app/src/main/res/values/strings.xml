@@ -20,6 +20,7 @@
     <string name="visual_effect">Visual Effects</string>
     <string name="advance_blink">Blink Mode</string>
     <string name="advance_marquee">Marquee</string>
+    <string name="table_mode">Table Mode</string>
 
     <!-- Setting Category -->
     <string name="customize">Customization</string>
@@ -39,7 +40,7 @@
     <string name="sample_05">The supervisor said there will be a special bonus this month !!!</string>
     <string name="sample_07">It seems like going to rain</string>
     <string name="sample_08">Would you mind spelling that out for me?</string>
-    <string name="designer">by Mr. Fatworm</string>
+    <string name="designer">by mrfatworm</string>
 
     <!-- Hint-->
     <string name="full_screen">Full screen</string>

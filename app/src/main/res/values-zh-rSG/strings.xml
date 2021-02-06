@@ -19,6 +19,7 @@
     <string name="word_setting_hint">长按拖曳 右滑删除</string>
     <string name="advance_blink">闪烁模式</string>
     <string name="advance_marquee">跑马灯</string>
+    <string name="table_mode">桌面模式</string>
     <string name="visual_effect">视觉特效</string>
 
 
@@ -40,7 +41,7 @@
     <string name="sample_05">領導說這個月有特別獎金 !!!</string>
     <string name="sample_07">今天下午似乎会下雨</string>
     <string name="sample_08">对不起 可以麻烦再说一遍吗</string>
-    <string name="designer">by Mr. Fatworm</string>
+    <string name="designer">by mrfatworm</string>
 
     <!-- Hint-->
     <string name="full_screen">全屏</string>

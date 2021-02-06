@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import yuntech.b10517012.visualchat.R
 import yuntech.b10517012.visualchat.model.ColorModel
 import yuntech.b10517012.visualchat.model.CustomizeViewModel
-import yuntech.b10517012.visualchat.R
 
 class ColorAdapter(
     private var data: Array<ColorModel>,

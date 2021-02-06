@@ -17,7 +17,6 @@ import yuntech.b10517012.visualchat.R
 import yuntech.b10517012.visualchat.adapter.WordSettingAdapter
 import yuntech.b10517012.visualchat.model.WordModel
 import yuntech.b10517012.visualchat.sqlite.MyWordDAO
-import kotlin.collections.ArrayList
 
 
 class MyWordSettingActivity : AppCompatActivity(), IEditWord {
