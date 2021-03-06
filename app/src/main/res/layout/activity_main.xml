@@ -96,7 +96,7 @@
             android:inputType="textMultiLine"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_main_show"
-            app:layout_constraintStart_toEndOf="@+id/btn_paste"
+            app:layout_constraintStart_toEndOf="@+id/btn_new_word"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
@@ -124,7 +124,7 @@
             app:srcCompat="@drawable/ic_delete" />
 
         <ImageButton
-            android:id="@+id/btn_paste"
+            android:id="@+id/btn_new_word"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"

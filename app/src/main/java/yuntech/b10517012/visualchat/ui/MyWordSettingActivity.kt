@@ -2,7 +2,6 @@ package yuntech.b10517012.visualchat.ui
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
@@ -60,6 +59,7 @@ class MyWordSettingActivity : AppCompatActivity(), IEditWord {
         adapter = WordSettingAdapter(wordList, this)
         recyclerView.adapter = adapter
 
+        /** Long click to sort, right swipe to delete */
         ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(
             ItemTouchHelper.UP or ItemTouchHelper.DOWN,
             ItemTouchHelper.RIGHT
@@ -87,7 +87,6 @@ class MyWordSettingActivity : AppCompatActivity(), IEditWord {
     }
 
     override fun alertEditWord(index: Long, word: String) {
-        Log.v("ListMon", "Click =  $index")
         val itemView = LayoutInflater.from(this).inflate(R.layout.alert_add_word, null)
         val edtAdd = itemView.findViewById<EditText>(R.id.edt_add_input)
         edtAdd.setText(word)

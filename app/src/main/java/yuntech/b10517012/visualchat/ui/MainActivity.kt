@@ -1,7 +1,6 @@
 package yuntech.b10517012.visualchat.ui
 
 import android.annotation.SuppressLint
-import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -16,7 +15,9 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
-import android.widget.*
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -24,6 +25,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.android.synthetic.main.activity_main.*
 import yuntech.b10517012.visualchat.R
 import yuntech.b10517012.visualchat.adapter.ViewPager2Adapter
 import yuntech.b10517012.visualchat.model.CustomizeViewModel
@@ -32,17 +34,10 @@ import yuntech.b10517012.visualchat.sqlite.MyWordDAO
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var tvPreview:TextView
-    private lateinit var imgBG: ImageView
     private lateinit var tabLayout:TabLayout
     private lateinit var viewPager: ViewPager2
     private lateinit var adapter: ViewPager2Adapter
     private lateinit var customizeViewModel: CustomizeViewModel
-    private lateinit var edtInput: EditText
-    private lateinit var btnShow: ImageButton
-    private lateinit var btnSetting: ImageButton
-    private lateinit var btnClear: ImageButton
-    private lateinit var btnAddWord: ImageButton
     private lateinit var myWordDAO: MyWordDAO
     private var tvSize: Float = 48F
     private var isAuto: Boolean = false
@@ -50,7 +45,6 @@ class MainActivity : AppCompatActivity() {
     private var isFlash: Boolean = false
     private var isMarquee: Boolean = false
     lateinit var pref: SharedPreferences
-    private lateinit var clipboard: ClipboardManager
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,62 +55,63 @@ class MainActivity : AppCompatActivity() {
         initView()
 
         /** Text color listener */
-        customizeViewModel.currentColor.observe(this, Observer { tvPreview.setTextColor(it)})
+        customizeViewModel.currentColor.observe(this, Observer { tv_main_preview.setTextColor(it)})
 
         /** Text color listener */
-        customizeViewModel.currentBGColor.observe(this, Observer {
-            imgBG.setBackgroundColor(it)
+        customizeViewModel.bgColor.observe(this, Observer {
+            img_main_preview_bg.setBackgroundColor(it)
             this.window.statusBarColor = it
         })
 
         /** Text size listener */
-        customizeViewModel.currentFont.observe(this, Observer {
-            tvPreview.setTextSize(TypedValue.COMPLEX_UNIT_SP, it)
+        customizeViewModel.font.observe(this, Observer {
+            tv_main_preview.setTextSize(TypedValue.COMPLEX_UNIT_SP, it)
             tvSize = it
         })
 
         /** Auto text size listener */
-        customizeViewModel.currentAutoFont.observe(this, Observer {
+        customizeViewModel.autoFont.observe(this, Observer {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 if(it){
-                    tvPreview.setAutoSizeTextTypeWithDefaults(TextView.AUTO_SIZE_TEXT_TYPE_UNIFORM)
+                    tv_main_preview.setAutoSizeTextTypeWithDefaults(TextView.AUTO_SIZE_TEXT_TYPE_UNIFORM)
                 }else{
-                    tvPreview.setAutoSizeTextTypeWithDefaults(TextView.AUTO_SIZE_TEXT_TYPE_NONE)
+                    tv_main_preview.setAutoSizeTextTypeWithDefaults(TextView.AUTO_SIZE_TEXT_TYPE_NONE)
                 }
             }
             isAuto = it
         })
 
         /** Bold text listener */
-        customizeViewModel.currentBold.observe(this, Observer {
+        customizeViewModel.bold.observe(this, Observer {
             if (it){
-                tvPreview.setTypeface(null, Typeface.BOLD)
+                tv_main_preview.setTypeface(null, Typeface.BOLD)
             }else{
-                tvPreview.setTypeface(null, Typeface.NORMAL)
+                tv_main_preview.setTypeface(null, Typeface.NORMAL)
             }
             isBold = it
         })
 
-        /** My word listener */
-        customizeViewModel.currentWord.observe(this, Observer { edtInput.setText(it) })
+        /** Select My Word listener */
+        customizeViewModel.word.observe(this, Observer { edt_main_input.setText(it) })
 
-        customizeViewModel.currentBlink.observe(this, Observer {
+        /** Advance function : Table Mode listener */
+        customizeViewModel.blink.observe(this, Observer {
             if (it){
                 val anim: Animation = AlphaAnimation(0.0f, 1.0f)
                 anim.duration = 500 //You can manage the blinking time with this parameter
                 anim.startOffset = 0
                 anim.repeatMode = Animation.REVERSE
                 anim.repeatCount = Animation.INFINITE
-                tvPreview.startAnimation(anim)
+                tv_main_preview.startAnimation(anim)
             }else{
-                tvPreview.clearAnimation()
+                tv_main_preview.clearAnimation()
             }
             isFlash = it
         })
-
-        customizeViewModel.currentMarquee.observe(this, Observer {
+        /** Advance function : Marquee Mode listener */
+        customizeViewModel.marquee.observe(this, Observer {
             if(it){
-                tvPreview.apply {
+                tv_main_preview.apply {
                     isSelected = true
                     ellipsize = TextUtils.TruncateAt.MARQUEE
                     marqueeRepeatLimit = -1
@@ -124,7 +119,7 @@ class MainActivity : AppCompatActivity() {
                     setHorizontallyScrolling(true)
                 }
             }else {
-                tvPreview.apply {
+                tv_main_preview.apply {
                     isSelected = false
                     ellipsize = TextUtils.TruncateAt.END
                     marqueeRepeatLimit = 0
@@ -134,58 +129,64 @@ class MainActivity : AppCompatActivity() {
             }
             isMarquee = it
         })
-
-        customizeViewModel.currentTable.observe(this, Observer {
+        /** Advance function : Table Mode listener */
+        customizeViewModel.table.observe(this, Observer {
             if (it){
-                tvPreview.rotation = 180F
+                tv_main_preview.rotation = 180F
             }else{
-                tvPreview.rotation = 0F
+                tv_main_preview.rotation = 0F
             }
         })
 
         /** Text input listener */
-        edtInput.addTextChangedListener(object : TextWatcher{
+        edt_main_input.addTextChangedListener(object : TextWatcher{
             override fun afterTextChanged(p0: Editable?) { }
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) { }
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                tvPreview.text = p0.toString()
+                tv_main_preview.text = p0.toString()
                 if(p0?.length == 0){
-                    tvPreview.text = getString(R.string.text_preview)
+                    tv_main_preview.text = getString(R.string.text_preview)
                 }
                 pref.edit().putString("Text", p0.toString()).apply()
             }
 
         })
-
-        btnClear.setOnClickListener {
-            edtInput.text.clear()
+        /** Clear edit text */
+        btn_clear.setOnClickListener {
+            edt_main_input.text.clear()
             Toast.makeText(this, getString(R.string.clear), Toast.LENGTH_SHORT).show()
         }
 
-        btnAddWord.setOnClickListener {
+        /** Add edit text to Sentences */
+        btn_new_word.setOnClickListener {
             val itemView = LayoutInflater.from(this).inflate(R.layout.alert_add_word, null)
             val edtAdd = itemView.findViewById<EditText>(R.id.edt_add_input)
-            edtAdd.setText(tvPreview.text)
-            val builder = AlertDialog.Builder(this)
+            edtAdd.text = edt_main_input.text
+            AlertDialog.Builder(this)
                 .setTitle(R.string.new_word)
                 .setView(itemView)
                 .setPositiveButton(R.string.add){ _, _ ->
-                    myWordDAO.insert(WordModel(0, edtAdd.text.toString(), myWordDAO.getLargestOrder()+1))
-                    //updateData()
-                    adapter.notifyDataSetChanged()
+                    if (!edtAdd.text.toString().equals("")){
+                        myWordDAO.insert(WordModel(0, edtAdd.text.toString(), myWordDAO.getLargestOrder()+1))
+                        adapter.notifyDataSetChanged()
+                        customizeViewModel.setNewWord(true)
+                        customizeViewModel.setNewWord(false)
+                    }else{
+                        edtAdd.hint = "Type something"
+                    }
                 }.show()
         }
 
         /** GO to fullscreen listener */
-        btnShow.setOnClickListener {
+        btn_main_show.setOnClickListener {
             val intent = Intent(this, TextShowActivity::class.java)
             val bundle = Bundle()
-            val bgColor = imgBG.background as ColorDrawable
+            val bgColor = img_main_preview_bg.background as ColorDrawable
 
             bundle.apply {
-                putString("text", tvPreview.text.toString())
+                putString("text", tv_main_preview.text.toString())
                 putFloat("size", tvSize)
-                putInt("color", tvPreview.currentTextColor)
+                putInt("color", tv_main_preview.currentTextColor)
                 putInt("bg", bgColor.color)
                 putBoolean("auto", isAuto)
                 putBoolean("bold", isBold )
@@ -197,28 +198,21 @@ class MainActivity : AppCompatActivity() {
         }
 
         /** GO to setting page listener */
-        btnSetting.setOnClickListener {
+        btn_main_setting.setOnClickListener {
             val intent = Intent(this, SettingsActivity::class.java)
             startActivity(intent)
         }
 
         if (pref.getString("Text", "")!= ""){
-            edtInput.setText(pref.getString("Text",""))
+            edt_main_input.setText(pref.getString("Text",""))
         }
 
     }
 
     private fun initView(){
-        tvPreview = findViewById(R.id.tv_main_preview)
-        imgBG = findViewById(R.id.img_main_preview_bg)
-        tabLayout = findViewById(R.id.tab_main_setting)
-        viewPager = findViewById(R.id.vp_main_setting)
-        edtInput = findViewById(R.id.edt_main_input)
-        btnShow = findViewById(R.id.btn_main_show)
-        btnSetting = findViewById(R.id.btn_main_setting)
-        btnClear = findViewById(R.id.btn_clear)
-        btnAddWord = findViewById(R.id.btn_paste)
         myWordDAO = MyWordDAO(this)
+        viewPager = findViewById(R.id.vp_main_setting)
+        tabLayout = findViewById(R.id.tab_main_setting)
 
         pref = getSharedPreferences("favor", Context.MODE_PRIVATE)
         if(pref.getBoolean("first", true)){
@@ -237,10 +231,7 @@ class MainActivity : AppCompatActivity() {
             }
             pref.edit().putBoolean("first", false).apply()
         }
-        clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        val height = resources.displayMetrics.heightPixels
-        val width = resources.displayMetrics.widthPixels
-        imgBG.layoutParams.height = width* width/height
+
 
         adapter = ViewPager2Adapter(this)
         adapter.setViewModel(customizeViewModel)

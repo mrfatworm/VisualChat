@@ -12,7 +12,7 @@ import yuntech.b10517012.visualchat.model.ColorModel
 import yuntech.b10517012.visualchat.model.CustomizeViewModel
 
 class ColorAdapter(
-    private var data: Array<ColorModel>,
+    private var data: Array<ColorModel.ColorText>,
     private var customizeViewModel: CustomizeViewModel,
     private var pref: SharedPreferences) : RecyclerView.Adapter<ColorAdapter.ViewHolder>() {
 

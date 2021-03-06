@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.SeekBar
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -82,8 +81,9 @@ class CustomizeStyleFragment : Fragment() {
 
     private fun initRecyclerview() {
         val linearLayoutManager = LinearLayoutManager(context)
+        val colorModel = ColorModel()
         linearLayoutManager.orientation = RecyclerView.HORIZONTAL
-        val adapter = ColorAdapter(sampleColorData(), customizeViewModel, pref)
+        val adapter = ColorAdapter( colorModel.sampleColorData(requireContext()), customizeViewModel, pref)
         recyclerView.layoutManager = linearLayoutManager
         recyclerView.adapter = adapter
     }
@@ -100,63 +100,6 @@ class CustomizeStyleFragment : Fragment() {
             cbBold.isChecked = true
         }
         seekBar.progress = pref.getInt("FontSize", 2)
-    }
-
-    private fun sampleColorData(): Array<ColorModel> {
-        val dataArray = Array(17){ ColorModel(0,0) }
-        dataArray[0].apply {
-            textColor = Color.WHITE
-            bgColor = ContextCompat.getColor(requireContext(), R.color.blackboard)}
-        dataArray[1].apply {
-            textColor = Color.WHITE
-            bgColor = ContextCompat.getColor(requireContext(), R.color.darkYellow) }
-        dataArray[2].apply {
-            textColor = Color.WHITE
-            bgColor = ContextCompat.getColor(requireContext(), R.color.darkRed) }
-        dataArray[3].apply {
-            textColor = Color.WHITE
-            bgColor = ContextCompat.getColor(requireContext(), R.color.navy) }
-        dataArray[4].apply {
-            textColor = Color.WHITE
-            bgColor = Color.BLACK }
-        dataArray[5].apply {
-            textColor = ContextCompat.getColor(requireContext(), R.color.pttYellow)
-            bgColor = Color.BLACK }
-        dataArray[6].apply {
-            textColor = Color.GREEN
-            bgColor = Color.BLACK }
-        dataArray[7].apply {
-            textColor = ContextCompat.getColor(requireContext(), R.color.skin)
-            bgColor = ContextCompat.getColor(requireContext(), R.color.black) }
-        dataArray[8].apply {
-            textColor = ContextCompat.getColor(requireContext(), R.color.skin)
-            bgColor = ContextCompat.getColor(requireContext(), R.color.navy) }
-        dataArray[9].apply {
-            textColor = ContextCompat.getColor(requireContext(), R.color.pttYellow)
-            bgColor = ContextCompat.getColor(requireContext(), R.color.navy) }
-        dataArray[10].apply {
-            textColor = ContextCompat.getColor(requireContext(), R.color.black)
-            bgColor = ContextCompat.getColor(requireContext(), R.color.lightYellow) }
-        dataArray[11].apply {
-            textColor = ContextCompat.getColor(requireContext(), R.color.navy)
-            bgColor = ContextCompat.getColor(requireContext(), R.color.lightYellow) }
-        dataArray[12].apply {
-            textColor = ContextCompat.getColor(requireContext(), R.color.pink)
-            bgColor = ContextCompat.getColor(requireContext(), R.color.lightYellow) }
-        dataArray[13].apply {
-            textColor = Color.WHITE
-            bgColor = ContextCompat.getColor(requireContext(), R.color.pink) }
-        dataArray[14].apply {
-            textColor = Color.BLACK
-            bgColor = ContextCompat.getColor(requireContext(), R.color.pttYellow) }
-        dataArray[15].apply {
-            textColor = ContextCompat.getColor(requireContext(), R.color.navy)
-            bgColor = ContextCompat.getColor(requireContext(), R.color.pttYellow) }
-        dataArray[16].apply {
-            textColor = ContextCompat.getColor(requireContext(), R.color.white)
-            bgColor = ContextCompat.getColor(requireContext(), R.color.colorPrimaryDark) }
-
-        return dataArray
     }
 
 }

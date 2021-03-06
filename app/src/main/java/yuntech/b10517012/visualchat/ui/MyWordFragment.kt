@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import yuntech.b10517012.visualchat.R
@@ -14,12 +15,13 @@ import yuntech.b10517012.visualchat.model.WordModel
 import yuntech.b10517012.visualchat.sqlite.MyWordDAO
 import java.util.*
 
-class MyWordFragment : Fragment() {
+class MyWordFragment : Fragment(){
 
     private lateinit var customizeViewModel: CustomizeViewModel
     private lateinit var recyclerView: RecyclerView
     private lateinit var wordAdapter: WordAdapter
     private val wordList: MutableList<WordModel> = ArrayList()
+    private lateinit var myWordDAO: MyWordDAO
 
     fun setViewModel(customizeViewModel: CustomizeViewModel){
         this.customizeViewModel = customizeViewModel
@@ -33,12 +35,29 @@ class MyWordFragment : Fragment() {
         initData()
         initRecyclerView()
 
+
         return root
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        customizeViewModel.newWord.observe(viewLifecycleOwner, Observer {
+            if (it){
+                updateData()
+            }
+             })
+    }
+
     private fun initData() {
-        val myWordDAO = MyWordDAO(context)
+        myWordDAO = MyWordDAO(context)
         wordList.addAll(myWordDAO.getAll()!!)
+    }
+
+    fun updateData(){
+        wordList.clear()
+        wordList.addAll(myWordDAO.getAll()!!)
+         wordList.reverse()
+         wordAdapter.notifyDataSetChanged()
     }
 
     private fun initView(root: View) {

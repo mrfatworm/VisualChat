@@ -5,18 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <TextView
+    <Button
         android:id="@+id/tv_word"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="20dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
         android:gravity="center"
         android:textSize="14sp"
         android:singleLine="true"
-        android:background="@drawable/my_word_bg"
+        android:textColor="@color/gray"
+        android:textAllCaps="false"
+        android:background="@drawable/btn_r20_bg_null"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
