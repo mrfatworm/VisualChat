@@ -35,8 +35,9 @@ class WordSettingAdapter(private var data: List<WordModel>, private val iView: I
         val model = data[position]
         holder.textView.text = model.sentence
 
+        // Edit data
         holder.textView.setOnClickListener{
-            iView.alertEditWord(model.id,model.sentence)
+            iView.myWordDialog(model.id,model.sentence)
         }
     }
 }

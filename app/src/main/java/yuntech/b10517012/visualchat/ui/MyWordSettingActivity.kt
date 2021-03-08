@@ -1,28 +1,23 @@
 package yuntech.b10517012.visualchat.ui
 
-import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.WindowManager
-import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import androidx.appcompat.app.AlertDialog
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.synthetic.main.activity_my_word_setting.*
 import yuntech.b10517012.visualchat.R
 import yuntech.b10517012.visualchat.adapter.WordSettingAdapter
 import yuntech.b10517012.visualchat.model.WordModel
 import yuntech.b10517012.visualchat.sqlite.MyWordDAO
+import yuntech.b10517012.visualchat.utils.AlertEditWord
 
 
 class MyWordSettingActivity : AppCompatActivity(), IEditWord {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: WordSettingAdapter
-    private lateinit var btnAdd: FloatingActionButton
     private var wordList: MutableList<WordModel> = ArrayList()
     private lateinit var myWordDAO: MyWordDAO
 
@@ -34,19 +29,33 @@ class MyWordSettingActivity : AppCompatActivity(), IEditWord {
         initView()
         initRecyclerView()
 
-        btnAdd.setOnClickListener {
-            alertEditWord(0,"")
+        fab_add_word.setOnClickListener {
+            myWordDialog(0, "")
+        }
+
+        btn_nothing.setOnClickListener {
+            myWordDialog(0, "")
         }
     }
 
     private fun updateData() {
         wordList.clear()
         wordList.addAll(myWordDAO.getAll()!!)
+        checkEmpty()
+    }
+
+    private fun checkEmpty() {
+        if (wordList.isEmpty()){
+            tv_nothing.visibility = View.VISIBLE
+            btn_nothing.visibility = View.VISIBLE
+        }else{
+            tv_nothing.visibility = View.INVISIBLE
+            btn_nothing.visibility = View.INVISIBLE
+        }
     }
 
     private fun initView() {
         recyclerView = findViewById(R.id.recyclerview)
-        btnAdd = findViewById(R.id.fab_add_word)
         myWordDAO = MyWordDAO(this)
     }
 
@@ -56,6 +65,7 @@ class MyWordSettingActivity : AppCompatActivity(), IEditWord {
         layoutManager.reverseLayout = true
         recyclerView.layoutManager = layoutManager
         wordList.addAll(myWordDAO.getAll()!!)
+        checkEmpty()
         adapter = WordSettingAdapter(wordList, this)
         recyclerView.adapter = adapter
 
@@ -86,41 +96,13 @@ class MyWordSettingActivity : AppCompatActivity(), IEditWord {
         }).attachToRecyclerView(recyclerView)
     }
 
-    override fun alertEditWord(index: Long, word: String) {
-        val itemView = LayoutInflater.from(this).inflate(R.layout.alert_add_word, null)
-        val edtAdd = itemView.findViewById<EditText>(R.id.edt_add_input)
-        edtAdd.setText(word)
-        val title: String
-        val btnText: String
-        if (edtAdd.text.toString() == ""){
-            title = getString(R.string.new_word)
-            btnText = getString(R.string.add)
-        }else{
-            title = getString(R.string.mod_word)
-            btnText = getString(R.string.mod)
-        }
-        edtAdd.setText(word)
-        val builder = AlertDialog.Builder(this)
-            .setTitle(title)
-            .setView(itemView)
-            .setPositiveButton(btnText){ _, _ ->
-                if (title == getString(R.string.new_word)){
-                    myWordDAO.insert(WordModel(0, edtAdd.text.toString(), myWordDAO.getLargestOrder()+1))
-                    updateData()
-                    adapter.notifyDataSetChanged()
-                }else if(title == getString(R.string.mod_word)){
-                    myWordDAO.update(WordModel(index, edtAdd.text.toString(), 0))
-                    updateData()
-                    adapter.notifyDataSetChanged()
-                }
-                val imm =
-                    getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                imm.hideSoftInputFromWindow(edtAdd.windowToken, 0)
-            }
-        // Soft keyboard auto show up
-        val dialog: AlertDialog = builder.create()
-        dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
-        edtAdd.requestFocus()
-        dialog.show()
+    override fun myWordDialog(index: Long, word: String) {
+        val alertEditWord = AlertEditWord()
+        alertEditWord.addAndMod(index, word, this, myWordDAO)
+    }
+
+    override fun updateAsDialogFinish() {
+        updateData()
+        adapter.notifyDataSetChanged()
     }
 }

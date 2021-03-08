@@ -50,5 +50,6 @@
     <string name="color_list_text">A</string>
     <string name="font_size">Font size</string>
     <string name="bold">Bold</string>
+    <string name="empty_title">Nothing here now, let\'s add something</string>
 
 </resources>

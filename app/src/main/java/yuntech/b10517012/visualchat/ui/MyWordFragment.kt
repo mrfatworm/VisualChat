@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
@@ -22,6 +23,7 @@ class MyWordFragment : Fragment(){
     private lateinit var wordAdapter: WordAdapter
     private val wordList: MutableList<WordModel> = ArrayList()
     private lateinit var myWordDAO: MyWordDAO
+    private lateinit var tvNothing: TextView
 
     fun setViewModel(customizeViewModel: CustomizeViewModel){
         this.customizeViewModel = customizeViewModel
@@ -34,7 +36,6 @@ class MyWordFragment : Fragment(){
         initView(root)
         initData()
         initRecyclerView()
-
 
         return root
     }
@@ -51,17 +52,28 @@ class MyWordFragment : Fragment(){
     private fun initData() {
         myWordDAO = MyWordDAO(context)
         wordList.addAll(myWordDAO.getAll()!!)
+        checkEmpty()
     }
 
     fun updateData(){
         wordList.clear()
         wordList.addAll(myWordDAO.getAll()!!)
-         wordList.reverse()
-         wordAdapter.notifyDataSetChanged()
+        checkEmpty()
+        wordList.reverse()
+        wordAdapter.notifyDataSetChanged()
+    }
+
+    private fun checkEmpty() {
+        if (wordList.isEmpty()) {
+            tvNothing.visibility = View.VISIBLE
+        } else {
+            tvNothing.visibility = View.INVISIBLE
+        }
     }
 
     private fun initView(root: View) {
         recyclerView = root.findViewById(R.id.recyclerview)
+        tvNothing = root.findViewById(R.id.tv_nothing)
     }
 
     private fun initRecyclerView() {

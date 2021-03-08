@@ -8,8 +8,9 @@ import yuntech.b10517012.visualchat.R
 class ColorModel() {
 
     class ColorText(var textColor: Int, var bgColor: Int)
-    
-    public fun sampleColorData(context: Context): Array<ColorText> {
+
+    // Official Color list
+    fun sampleColorData(context: Context): Array<ColorText> {
         val dataArray = Array(17){ ColorText(0,0) }
         dataArray[0].apply {
             textColor = Color.WHITE

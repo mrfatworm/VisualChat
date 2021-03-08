@@ -51,5 +51,6 @@
     <string name="color_list_text">A</string>
     <string name="font_size">フォントサイズ</string>
     <string name="bold">自動</string>
+    <string name="empty_title">Nothing here now, let\'s add something</string>
 
 </resources>

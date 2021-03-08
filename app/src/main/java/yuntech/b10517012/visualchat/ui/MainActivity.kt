@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var adapter: ViewPager2Adapter
     private lateinit var customizeViewModel: CustomizeViewModel
     private lateinit var myWordDAO: MyWordDAO
+    private lateinit var alertDialog: AlertDialog
     private var tvSize: Float = 48F
     private var isAuto: Boolean = false
     private var isBold: Boolean = false

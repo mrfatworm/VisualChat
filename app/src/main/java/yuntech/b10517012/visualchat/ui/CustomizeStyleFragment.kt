@@ -43,6 +43,7 @@ class CustomizeStyleFragment : Fragment() {
 
         initRecyclerview()
 
+        // On/off Auto size function
         swAuto.setOnCheckedChangeListener { _, b ->
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 seekBar.isEnabled = !b
@@ -53,11 +54,13 @@ class CustomizeStyleFragment : Fragment() {
             }
         }
 
+        // Font bold editor
         cbBold.setOnCheckedChangeListener { _, b ->
             customizeViewModel.setBold(b)
             pref.edit().putBoolean("Bold", b).apply()
         }
 
+        // Font size editor
         seekBar.setOnSeekBarChangeListener(object :SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
                 customizeViewModel.setFont(((p1 + 2)*5).toFloat())
@@ -88,6 +91,7 @@ class CustomizeStyleFragment : Fragment() {
         recyclerView.adapter = adapter
     }
 
+    // Loading history setting
     private fun loadFavor() {
         if (pref.getInt("TextColor", 0) != 0){
             customizeViewModel.setColor(pref.getInt("TextColor", Color.WHITE))
