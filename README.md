@@ -1,4 +1,4 @@
-# VisualChat
+# VisualChat (Deprecated)
 
 https://play.google.com/store/apps/details?id=yuntech.b10517012.visualchat
 
