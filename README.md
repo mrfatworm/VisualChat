@@ -1,4 +1,4 @@
-# VisualChat (Deprecated) 當初學習 Kotlin 寫的專案，無架構可言...
+# VisualChat (Deprecated) 當初學習 Kotlin 寫的專案
 
 https://play.google.com/store/apps/details?id=yuntech.b10517012.visualchat
 
